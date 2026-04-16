@@ -1,35 +1,37 @@
-# laksh-ai-platform
+Laksh is a specialized career-tech ecosystem designed to eliminate the information friction in India's public sector recruitment. It empowers youth by providing instant eligibility matching, personalized preparation paths, and a funding bridge for low-income aspirants.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+---
 
-## Built with v0
+## 🚀 The Problem
+Government job recruitment in India is plagued by complexity:
+* **20% Rejection Rate:** Millions of applications are rejected pre-exam due to avoidable eligibility errors (age miscalculation, expired certificates).
+* **57% Awareness Gap:** Graduates often focus only on the "Top 3" exams, missing thousands of niche technical roles they qualify for.
+* **Bureaucratic Jargon:** 50+ page notification PDFs make it nearly impossible for rural youth to navigate eligibility rules.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+## ✨ Key Features
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_R2BhO3gRsXfHsPSwR7DGbsF3TQyp)
+### ⚖️ AI Smart-Match Engine
+Our engine parses complex government notifications using NLP and compares them against the user's **Smart Profile**. Users get an instant **Green (Eligible)** or **Red (Ineligible)** status for every major exam.
 
-## Getting Started
+### 📄 OCR Document Vault
+Upload certificates once. The system uses **Optical Character Recognition** to extract validity dates and category details, flagging potential rejection risks before the user even applies.
 
-First, run the development server:
+### 🗺️ The "Bridge" Roadmap
+Ineligible for your dream role? Yogy doesn't just say "No." It generates a path, recommending specific certifications (e.g., NIELIT, SWAYAM) to make you eligible for the next cycle.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### 🎯 Adaptive Prep Vault
+* **Weakness Heatmaps:** Visualizes your mock test performance to identify syllabus gaps.
+* **Success Probability:** ML-based simulation predicting your chances of selection based on historical cut-off trends.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🤝 NGO Funding Bridge
+Connects high-potential, low-income students with verified NGOs to sponsor application fees and preparation materials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
-
-<a href="https://v0.app/chat/api/kiro/clone/gawasaastha12-jpg/laksh-ai-platform" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+- **Frontend:** Next.js 14, Tailwind CSS, Framer Motion (Animations), Shadcn/UI
+- **Backend:** FastAPI (Python) / Node.js
+- **AI/ML:** Python (spaCy/Sentence-Transformers for PDF parsing), Scikit-learn (Success Prediction)
+- **Database:** PostgreSQL (Relational logic for Reservation Categories)
+- **Scraper:** Scrapy (Real-time job notification ingestion)
