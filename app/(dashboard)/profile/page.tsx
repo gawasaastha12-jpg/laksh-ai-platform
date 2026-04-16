@@ -11,11 +11,44 @@ import {
   Edit2,
   Save,
   X,
+  MapPin,
+  Languages,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useProfile } from "@/lib/profile-context";
-import { cn } from "@/lib/utils";
+import { IndianState, Language } from "@/lib/types";
+
+const stateOptions: { value: IndianState; label: string }[] = [
+  { value: "all", label: "All India" },
+  { value: "maharashtra", label: "Maharashtra" },
+  { value: "uttar-pradesh", label: "Uttar Pradesh" },
+  { value: "karnataka", label: "Karnataka" },
+  { value: "tamil-nadu", label: "Tamil Nadu" },
+  { value: "rajasthan", label: "Rajasthan" },
+  { value: "gujarat", label: "Gujarat" },
+  { value: "madhya-pradesh", label: "Madhya Pradesh" },
+  { value: "bihar", label: "Bihar" },
+  { value: "west-bengal", label: "West Bengal" },
+  { value: "andhra-pradesh", label: "Andhra Pradesh" },
+];
+
+const languageOptions: { value: Language; label: string; native: string }[] = [
+  { value: "english", label: "English", native: "English" },
+  { value: "hindi", label: "Hindi", native: "हिंदी" },
+  { value: "marathi", label: "Marathi", native: "मराठी" },
+  { value: "tamil", label: "Tamil", native: "தமிழ்" },
+  { value: "telugu", label: "Telugu", native: "తెలుగు" },
+  { value: "kannada", label: "Kannada", native: "ಕನ್ನಡ" },
+  { value: "gujarati", label: "Gujarati", native: "ગુજરાતી" },
+];
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -148,6 +181,82 @@ export default function ProfilePage() {
             <div className="p-4 rounded-xl bg-secondary">
               <p className="text-sm text-muted-foreground mb-1">Category</p>
               <p className="font-medium">{profile.category.toUpperCase()}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Location & Language */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-primary" />
+            Location & Language
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-secondary">
+              <p className="text-sm text-muted-foreground mb-2">State</p>
+              {isEditing ? (
+                <Select
+                  value={editedProfile?.state || "all"}
+                  onValueChange={(value: IndianState) =>
+                    setEditedProfile((prev) =>
+                      prev ? { ...prev, state: value } : prev
+                    )
+                  }
+                >
+                  <SelectTrigger className="bg-input">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {stateOptions.map((state) => (
+                      <SelectItem key={state.value} value={state.value}>
+                        {state.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <p className="font-medium flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  {stateOptions.find((s) => s.value === profile.state)?.label ||
+                    "All India"}
+                </p>
+              )}
+            </div>
+            <div className="p-4 rounded-xl bg-secondary">
+              <p className="text-sm text-muted-foreground mb-2">
+                Preferred Language
+              </p>
+              {isEditing ? (
+                <Select
+                  value={editedProfile?.language || "english"}
+                  onValueChange={(value: Language) =>
+                    setEditedProfile((prev) =>
+                      prev ? { ...prev, language: value } : prev
+                    )
+                  }
+                >
+                  <SelectTrigger className="bg-input">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languageOptions.map((lang) => (
+                      <SelectItem key={lang.value} value={lang.value}>
+                        {lang.label} ({lang.native})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <p className="font-medium flex items-center gap-2">
+                  <Languages className="h-4 w-4 text-muted-foreground" />
+                  {languageOptions.find((l) => l.value === profile.language)
+                    ?.label || "English"}{" "}
+                  (
+                  {languageOptions.find((l) => l.value === profile.language)
+                    ?.native || "English"}
+                  )
+                </p>
+              )}
             </div>
           </div>
         </div>

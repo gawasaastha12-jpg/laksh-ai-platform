@@ -4,7 +4,12 @@ import jobsData from './data/jobs.json';
 export function checkEligibility(profile: UserProfile): EligibilityResult[] {
   const jobs = jobsData as Job[];
   
-  return jobs.map(job => {
+  // Filter jobs by state - show all-India jobs plus state-specific jobs
+  const filteredJobs = jobs.filter(job => 
+    job.state === 'all' || job.state === profile.state
+  );
+  
+  return filteredJobs.map(job => {
     const reasons: string[] = [];
     const qualifications: string[] = [];
     const gaps: string[] = [];
@@ -76,6 +81,24 @@ export function checkEligibility(profile: UserProfile): EligibilityResult[] {
     if (relevantSkills.length > 0) {
       qualifications.push(`Relevant skills: ${relevantSkills.join(', ')}`);
       score += relevantSkills.length * 5;
+    }
+    
+    // Check required certifications
+    const requiredCerts = job.requirements.requiredCertifications || [];
+    if (requiredCerts.length > 0) {
+      const missingCerts = requiredCerts.filter(cert => 
+        !profile.certifications.some(userCert => 
+          userCert.toLowerCase().includes(cert.toLowerCase().replace(' Certificate', ''))
+        )
+      );
+      
+      if (missingCerts.length > 0) {
+        reasons.push(`Missing required certification: ${missingCerts.join(', ')}`);
+        score -= 25;
+        gaps.push(`Required certification missing: ${missingCerts.join(', ')}`);
+      } else {
+        qualifications.push(`All required certifications held`);
+      }
     }
     
     // Certifications bonus

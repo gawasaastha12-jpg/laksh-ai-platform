@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Calendar, Users, IndianRupee } from "lucide-react";
+import { Building2, Calendar, Users, IndianRupee, ExternalLink, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { EligibilityResult } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -66,6 +67,20 @@ function CircularProgress({
   );
 }
 
+const stateLabels: Record<string, string> = {
+  all: "All India",
+  maharashtra: "Maharashtra",
+  "uttar-pradesh": "Uttar Pradesh",
+  karnataka: "Karnataka",
+  "tamil-nadu": "Tamil Nadu",
+  rajasthan: "Rajasthan",
+  gujarat: "Gujarat",
+  "madhya-pradesh": "Madhya Pradesh",
+  bihar: "Bihar",
+  "west-bengal": "West Bengal",
+  "andhra-pradesh": "Andhra Pradesh",
+};
+
 export function JobCard({ result, onClick }: JobCardProps) {
   const { job, status, probability } = result;
 
@@ -92,6 +107,11 @@ export function JobCard({ result, onClick }: JobCardProps) {
 
   const config = statusConfig[status];
 
+  const handleApplyClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(job.officialUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}
@@ -115,8 +135,8 @@ export function JobCard({ result, onClick }: JobCardProps) {
         <CircularProgress value={probability} status={status} />
       </div>
 
-      {/* Status Badge */}
-      <div className="mb-4">
+      {/* Status Badge & State */}
+      <div className="mb-4 flex items-center gap-2 flex-wrap">
         <span
           className={cn(
             "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium",
@@ -126,6 +146,12 @@ export function JobCard({ result, onClick }: JobCardProps) {
         >
           {config.label}
         </span>
+        {job.state !== "all" && (
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+            <MapPin className="h-3 w-3" />
+            {stateLabels[job.state] || job.state}
+          </span>
+        )}
       </div>
 
       {/* Info Grid */}
@@ -156,6 +182,18 @@ export function JobCard({ result, onClick }: JobCardProps) {
         <p className="text-sm text-muted-foreground line-clamp-2">
           {result.reasons[0]}
         </p>
+      </div>
+
+      {/* Apply Button */}
+      <div className="mt-4">
+        <Button
+          onClick={handleApplyClick}
+          variant="outline"
+          className="w-full gap-2 border-primary/50 hover:bg-primary/10 hover:text-primary"
+        >
+          Apply on Official Website
+          <ExternalLink className="h-4 w-4" />
+        </Button>
       </div>
     </motion.div>
   );

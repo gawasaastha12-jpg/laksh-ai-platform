@@ -2,11 +2,28 @@ export type Category = 'general' | 'obc' | 'sc' | 'st' | 'ews' | 'pwd';
 
 export type EligibilityStatus = 'eligible' | 'near-eligible' | 'ineligible';
 
+export type IndianState = 
+  | 'all'
+  | 'maharashtra'
+  | 'uttar-pradesh'
+  | 'karnataka'
+  | 'tamil-nadu'
+  | 'rajasthan'
+  | 'gujarat'
+  | 'madhya-pradesh'
+  | 'bihar'
+  | 'west-bengal'
+  | 'andhra-pradesh';
+
+export type Language = 'english' | 'hindi' | 'marathi' | 'tamil' | 'telugu' | 'kannada' | 'gujarati';
+
 export interface UserProfile {
   // Personal
   name: string;
   age: number;
   category: Category;
+  state: IndianState;
+  language: Language;
   
   // Education
   degree: string;
@@ -16,6 +33,26 @@ export interface UserProfile {
   // Skills
   skills: string[];
   certifications: string[];
+}
+
+export interface JobSubject {
+  name: string;
+  topics: string[];
+  weightage: number;
+}
+
+export interface LanguageResource {
+  language: Language;
+  mockTestUrl: string;
+  studyMaterialUrl: string;
+  label: string;
+}
+
+export interface EligibilityStep {
+  title: string;
+  description: string;
+  actionUrl?: string;
+  duration?: string;
 }
 
 export interface Job {
@@ -28,15 +65,21 @@ export interface Job {
   vacancies: number;
   examDate: string;
   applicationDeadline: string;
+  officialUrl: string;
+  state: IndianState;
   syllabus: string[];
+  subjects: JobSubject[];
+  languageResources: LanguageResource[];
   requirements: {
     minAge: number;
     maxAge: Record<Category, number>;
     minEducation: 'graduation' | '12th' | '10th';
     minPercentage: number;
+    requiredCertifications?: string[];
     attempts?: Record<string, number>;
   };
   tips: string[];
+  ineligibilitySteps: Record<string, EligibilityStep[]>;
 }
 
 export interface EligibilityResult {
@@ -71,4 +114,17 @@ export interface Scholarship {
   amount: string;
   eligibility: string;
   deadline: string;
+}
+
+export interface MockQuestion {
+  id: string;
+  question: Record<Language, string>;
+  options: Record<Language, string[]>;
+  correctAnswer: number;
+  subject: string;
+}
+
+export interface MockTest {
+  jobId: string;
+  questions: MockQuestion[];
 }

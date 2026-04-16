@@ -1,0 +1,558 @@
+{
+  "ssc-cgl": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "If the ratio of A to B is 3:4 and the ratio of B to C is 5:6, what is the ratio of A to C?",
+        "hindi": "यदि A और B का अनुपात 3:4 है और B और C का अनुपात 5:6 है, तो A और C का अनुपात क्या है?"
+      },
+      "options": {
+        "english": ["5:8", "15:24", "3:6", "5:6"],
+        "hindi": ["5:8", "15:24", "3:6", "5:6"]
+      },
+      "correctAnswer": 0,
+      "subject": "Quantitative Aptitude"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Find the odd one out: Apple, Mango, Banana, Carrot, Orange",
+        "hindi": "विषम को चुनें: सेब, आम, केला, गाजर, संतरा"
+      },
+      "options": {
+        "english": ["Apple", "Mango", "Carrot", "Orange"],
+        "hindi": ["सेब", "आम", "गाजर", "संतरा"]
+      },
+      "correctAnswer": 2,
+      "subject": "General Intelligence & Reasoning"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Who was the first President of India?",
+        "hindi": "भारत के पहले राष्ट्रपति कौन थे?"
+      },
+      "options": {
+        "english": ["Jawaharlal Nehru", "Dr. Rajendra Prasad", "Dr. S. Radhakrishnan", "Dr. Zakir Hussain"],
+        "hindi": ["जवाहरलाल नेहरू", "डॉ. राजेंद्र प्रसाद", "डॉ. एस. राधाकृष्णन", "डॉ. जाकिर हुसैन"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Awareness"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Choose the correct spelling:",
+        "hindi": "सही वर्तनी चुनें:"
+      },
+      "options": {
+        "english": ["Accomodation", "Accommodation", "Acommodation", "Acomodation"],
+        "hindi": ["Accomodation", "Accommodation", "Acommodation", "Acomodation"]
+      },
+      "correctAnswer": 1,
+      "subject": "English Comprehension"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "A train 150m long passes a pole in 15 seconds. What is the speed of the train in km/hr?",
+        "hindi": "150 मीटर लंबी ट्रेन 15 सेकंड में एक खंभे को पार करती है। ट्रेन की गति किमी/घंटा में क्या है?"
+      },
+      "options": {
+        "english": ["36 km/hr", "45 km/hr", "30 km/hr", "40 km/hr"],
+        "hindi": ["36 किमी/घंटा", "45 किमी/घंटा", "30 किमी/घंटा", "40 किमी/घंटा"]
+      },
+      "correctAnswer": 0,
+      "subject": "Quantitative Aptitude"
+    }
+  ],
+  "upsc-cse": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "The Preamble to the Constitution of India was amended by which Constitutional Amendment?",
+        "hindi": "भारत के संविधान की प्रस्तावना में किस संविधान संशोधन द्वारा संशोधन किया गया था?"
+      },
+      "options": {
+        "english": ["42nd Amendment", "44th Amendment", "46th Amendment", "52nd Amendment"],
+        "hindi": ["42वां संशोधन", "44वां संशोधन", "46वां संशोधन", "52वां संशोधन"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies II"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Which of the following rivers does not originate in Indian territory?",
+        "hindi": "निम्नलिखित में से कौन सी नदी भारतीय क्षेत्र में उत्पन्न नहीं होती?"
+      },
+      "options": {
+        "english": ["Ganga", "Brahmaputra", "Sutlej", "Both B and C"],
+        "hindi": ["गंगा", "ब्रह्मपुत्र", "सतलज", "B और C दोनों"]
+      },
+      "correctAnswer": 3,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "The concept of 'Carbon Credit' originated from which protocol?",
+        "hindi": "कार्बन क्रेडिट की अवधारणा किस प्रोटोकॉल से उत्पन्न हुई?"
+      },
+      "options": {
+        "english": ["Montreal Protocol", "Kyoto Protocol", "Paris Agreement", "Geneva Protocol"],
+        "hindi": ["मॉन्ट्रियल प्रोटोकॉल", "क्योटो प्रोटोकॉल", "पेरिस समझौता", "जिनेवा प्रोटोकॉल"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies III"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Which of the following is NOT a fundamental duty under Article 51A?",
+        "hindi": "निम्नलिखित में से कौन अनुच्छेद 51A के तहत मौलिक कर्तव्य नहीं है?"
+      },
+      "options": {
+        "english": ["To abide by the Constitution", "To vote in elections", "To protect the sovereignty of India", "To develop scientific temper"],
+        "hindi": ["संविधान का पालन करना", "चुनाव में मतदान करना", "भारत की संप्रभुता की रक्षा करना", "वैज्ञानिक दृष्टिकोण विकसित करना"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies IV"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "The Battle of Plassey was fought in which year?",
+        "hindi": "प्लासी का युद्ध किस वर्ष लड़ा गया था?"
+      },
+      "options": {
+        "english": ["1757", "1764", "1857", "1761"],
+        "hindi": ["1757", "1764", "1857", "1761"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    }
+  ],
+  "ibps-po": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "What is the full form of NEFT?",
+        "hindi": "NEFT का पूर्ण रूप क्या है?"
+      },
+      "options": {
+        "english": ["National Electronic Funds Transfer", "New Electronic Fund Transaction", "National Electronic Fund Transaction", "None of these"],
+        "hindi": ["नेशनल इलेक्ट्रॉनिक फंड्स ट्रांसफर", "न्यू इलेक्ट्रॉनिक फंड ट्रांजैक्शन", "नेशनल इलेक्ट्रॉनिक फंड ट्रांजैक्शन", "इनमें से कोई नहीं"]
+      },
+      "correctAnswer": 0,
+      "subject": "Banking Awareness"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "If 5 + 3 = 28, 9 + 1 = 810, 8 + 6 = 214, then 5 + 4 = ?",
+        "hindi": "यदि 5 + 3 = 28, 9 + 1 = 810, 8 + 6 = 214, तो 5 + 4 = ?"
+      },
+      "options": {
+        "english": ["19", "95", "18", "19"],
+        "hindi": ["19", "95", "18", "19"]
+      },
+      "correctAnswer": 0,
+      "subject": "Reasoning Ability"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "A sum of Rs. 12,500 amounts to Rs. 15,500 in 4 years at simple interest. Find the rate of interest.",
+        "hindi": "12,500 रुपये की राशि साधारण ब्याज पर 4 वर्षों में 15,500 रुपये हो जाती है। ब्याज दर ज्ञात कीजिए।"
+      },
+      "options": {
+        "english": ["6%", "5%", "8%", "4%"],
+        "hindi": ["6%", "5%", "8%", "4%"]
+      },
+      "correctAnswer": 0,
+      "subject": "Quantitative Aptitude"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Choose the word most similar in meaning to 'ENORMOUS':",
+        "hindi": "'ENORMOUS' के समान अर्थ वाला शब्द चुनें:"
+      },
+      "options": {
+        "english": ["Tiny", "Huge", "Small", "Thin"],
+        "hindi": ["छोटा", "विशाल", "छोटा", "पतला"]
+      },
+      "correctAnswer": 1,
+      "subject": "English Language"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "Who is the current Governor of RBI? (As of 2026)",
+        "hindi": "RBI के वर्तमान गवर्नर कौन हैं? (2026 के अनुसार)"
+      },
+      "options": {
+        "english": ["Shaktikanta Das", "Urjit Patel", "Raghuram Rajan", "Sanjay Malhotra"],
+        "hindi": ["शक्तिकांत दास", "उर्जित पटेल", "रघुराम राजन", "संजय मल्होत्रा"]
+      },
+      "correctAnswer": 3,
+      "subject": "Banking Awareness"
+    }
+  ],
+  "rrb-ntpc": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "What is the headquarters of Indian Railways?",
+        "hindi": "भारतीय रेलवे का मुख्यालय कहाँ है?"
+      },
+      "options": {
+        "english": ["Mumbai", "New Delhi", "Kolkata", "Chennai"],
+        "hindi": ["मुंबई", "नई दिल्ली", "कोलकाता", "चेन्नई"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Awareness"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Find the missing number: 2, 6, 12, 20, 30, ?",
+        "hindi": "लुप्त संख्या ज्ञात कीजिए: 2, 6, 12, 20, 30, ?"
+      },
+      "options": {
+        "english": ["40", "42", "44", "46"],
+        "hindi": ["40", "42", "44", "46"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Intelligence & Reasoning"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Which vitamin is known as the 'Sunshine Vitamin'?",
+        "hindi": "कौन सा विटामिन 'सनशाइन विटामिन' के रूप में जाना जाता है?"
+      },
+      "options": {
+        "english": ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+        "hindi": ["विटामिन A", "विटामिन B", "विटामिन C", "विटामिन D"]
+      },
+      "correctAnswer": 3,
+      "subject": "General Science"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "If the cost price of 15 articles is equal to the selling price of 12 articles, find the profit percent.",
+        "hindi": "यदि 15 वस्तुओं का क्रय मूल्य 12 वस्तुओं के विक्रय मूल्य के बराबर है, तो लाभ प्रतिशत ज्ञात कीजिए।"
+      },
+      "options": {
+        "english": ["20%", "25%", "30%", "15%"],
+        "hindi": ["20%", "25%", "30%", "15%"]
+      },
+      "correctAnswer": 1,
+      "subject": "Mathematics"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "Which is the longest railway platform in India?",
+        "hindi": "भारत का सबसे लंबा रेलवे प्लेटफॉर्म कौन सा है?"
+      },
+      "options": {
+        "english": ["Gorakhpur", "Kharagpur", "Kollam", "Hubli"],
+        "hindi": ["गोरखपुर", "खड़गपुर", "कोल्लम", "हुबली"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Awareness"
+    }
+  ],
+  "mpsc-rajyaseva": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "Who founded the Maratha Empire?",
+        "hindi": "मराठा साम्राज्य की स्थापना किसने की?",
+        "marathi": "मराठा साम्राज्याची स्थापना कोणी केली?"
+      },
+      "options": {
+        "english": ["Shivaji Maharaj", "Sambhaji Maharaj", "Bajirao I", "Balaji Vishwanath"],
+        "hindi": ["शिवाजी महाराज", "संभाजी महाराज", "बाजीराव प्रथम", "बालाजी विश्वनाथ"],
+        "marathi": ["शिवाजी महाराज", "संभाजी महाराज", "बाजीराव पहिला", "बालाजी विश्वनाथ"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Which is the largest district by area in Maharashtra?",
+        "hindi": "क्षेत्रफल के हिसाब से महाराष्ट्र का सबसे बड़ा जिला कौन सा है?",
+        "marathi": "क्षेत्रफळानुसार महाराष्ट्रातील सर्वात मोठा जिल्हा कोणता?"
+      },
+      "options": {
+        "english": ["Pune", "Ahmednagar", "Nashik", "Nagpur"],
+        "hindi": ["पुणे", "अहमदनगर", "नासिक", "नागपुर"],
+        "marathi": ["पुणे", "अहमदनगर", "नाशिक", "नागपूर"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Which dam is the largest earthen dam in Maharashtra?",
+        "hindi": "महाराष्ट्र का सबसे बड़ा मिट्टी का बांध कौन सा है?",
+        "marathi": "महाराष्ट्रातील सर्वात मोठे मातीचे धरण कोणते?"
+      },
+      "options": {
+        "english": ["Koyna Dam", "Jayakwadi Dam", "Ujani Dam", "Vaitarna Dam"],
+        "hindi": ["कोयना बांध", "जायकवाड़ी बांध", "उजनी बांध", "वैतरणा बांध"],
+        "marathi": ["कोयना धरण", "जायकवाडी धरण", "उजनी धरण", "वैतरणा धरण"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Maharashtra Day is celebrated on which date?",
+        "hindi": "महाराष्ट्र दिवस किस तारीख को मनाया जाता है?",
+        "marathi": "महाराष्ट्र दिन कोणत्या तारखेला साजरा केला जातो?"
+      },
+      "options": {
+        "english": ["1st May", "26th January", "15th August", "2nd October"],
+        "hindi": ["1 मई", "26 जनवरी", "15 अगस्त", "2 अक्टूबर"],
+        "marathi": ["1 मे", "26 जानेवारी", "15 ऑगस्ट", "2 ऑक्टोबर"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies II"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "Who was the first Chief Minister of Maharashtra?",
+        "hindi": "महाराष्ट्र के पहले मुख्यमंत्री कौन थे?",
+        "marathi": "महाराष्ट्राचे पहिले मुख्यमंत्री कोण होते?"
+      },
+      "options": {
+        "english": ["Yashwantrao Chavan", "Vasantrao Naik", "Shankarrao Chavan", "Barrister A.R. Antulay"],
+        "hindi": ["यशवंतराव चव्हाण", "वसंतराव नाईक", "शंकरराव चव्हाण", "बैरिस्टर ए.आर. अंतुले"],
+        "marathi": ["यशवंतराव चव्हाण", "वसंतराव नाईक", "शंकरराव चव्हाण", "ॲड. ए.आर. अंतुले"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies II"
+    }
+  ],
+  "uppsc-pcs": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "Which river is known as the 'Sorrow of Bihar'?",
+        "hindi": "किस नदी को 'बिहार का शोक' कहा जाता है?"
+      },
+      "options": {
+        "english": ["Ganga", "Kosi", "Gandak", "Son"],
+        "hindi": ["गंगा", "कोसी", "गंडक", "सोन"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Lucknow Pact was signed in which year?",
+        "hindi": "लखनऊ समझौता किस वर्ष हुआ था?"
+      },
+      "options": {
+        "english": ["1916", "1920", "1919", "1915"],
+        "hindi": ["1916", "1920", "1919", "1915"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Kumbh Mela is held at how many places?",
+        "hindi": "कुंभ मेला कितने स्थानों पर आयोजित होता है?"
+      },
+      "options": {
+        "english": ["2", "3", "4", "5"],
+        "hindi": ["2", "3", "4", "5"]
+      },
+      "correctAnswer": 2,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Which is the largest city of Uttar Pradesh by population?",
+        "hindi": "जनसंख्या के हिसाब से उत्तर प्रदेश का सबसे बड़ा शहर कौन सा है?"
+      },
+      "options": {
+        "english": ["Lucknow", "Kanpur", "Varanasi", "Agra"],
+        "hindi": ["लखनऊ", "कानपुर", "वाराणसी", "आगरा"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "Taj Mahal was built by which Mughal Emperor?",
+        "hindi": "ताजमहल किस मुगल सम्राट ने बनवाया था?"
+      },
+      "options": {
+        "english": ["Akbar", "Jahangir", "Shah Jahan", "Aurangzeb"],
+        "hindi": ["अकबर", "जहांगीर", "शाहजहां", "औरंगजेब"]
+      },
+      "correctAnswer": 2,
+      "subject": "General Studies I"
+    }
+  ],
+  "kpsc-kas": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "Who founded the Vijayanagara Empire?",
+        "hindi": "विजयनगर साम्राज्य की स्थापना किसने की?",
+        "kannada": "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯವನ್ನು ಯಾರು ಸ್ಥಾಪಿಸಿದರು?"
+      },
+      "options": {
+        "english": ["Harihara and Bukka", "Krishnadevaraya", "Ramaraya", "Venkata II"],
+        "hindi": ["हरिहर और बुक्का", "कृष्णदेवराय", "रामराय", "वेंकट II"],
+        "kannada": ["ಹರಿಹರ ಮತ್ತು ಬುಕ್ಕ", "ಕೃಷ್ಣದೇವರಾಯ", "ರಾಮರಾಯ", "ವೆಂಕಟ II"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Which is the state animal of Karnataka?",
+        "hindi": "कर्नाटक का राज्य पशु कौन सा है?",
+        "kannada": "ಕರ್ನಾಟಕದ ರಾಜ್ಯ ಪ್ರಾಣಿ ಯಾವುದು?"
+      },
+      "options": {
+        "english": ["Tiger", "Elephant", "Lion", "Leopard"],
+        "hindi": ["बाघ", "हाथी", "शेर", "तेंदुआ"],
+        "kannada": ["ಹುಲಿ", "ಆನೆ", "ಸಿಂಹ", "ಚಿರತೆ"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Which waterfall is known as the 'Niagara of India'?",
+        "hindi": "किस जलप्रपात को 'भारत का नियाग्रा' कहा जाता है?",
+        "kannada": "ಯಾವ ಜಲಪಾತವನ್ನು 'ಭಾರತದ ನಯಾಗರ' ಎಂದು ಕರೆಯುತ್ತಾರೆ?"
+      },
+      "options": {
+        "english": ["Jog Falls", "Chitrakot Falls", "Athirappilly Falls", "Dudhsagar Falls"],
+        "hindi": ["जोग जलप्रपात", "चित्रकोट जलप्रपात", "अथिरापल्ली जलप्रपात", "दूधसागर जलप्रपात"],
+        "kannada": ["ಜೋಗ ಜಲಪಾತ", "ಚಿತ್ರಕೂಟ ಜಲಪಾತ", "ಅಥಿರಪ್ಪಳ್ಳಿ ಜಲಪಾತ", "ದೂಧಸಾಗರ ಜಲಪಾತ"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Hampi is located on the banks of which river?",
+        "hindi": "हम्पी किस नदी के किनारे स्थित है?",
+        "kannada": "ಹಂಪಿ ಯಾವ ನದಿಯ ದಡದಲ್ಲಿದೆ?"
+      },
+      "options": {
+        "english": ["Krishna", "Tungabhadra", "Cauvery", "Sharavathi"],
+        "hindi": ["कृष्णा", "तुंगभद्रा", "कावेरी", "शरावती"],
+        "kannada": ["ಕೃಷ್ಣಾ", "ತುಂಗಭದ್ರಾ", "ಕಾವೇರಿ", "ಶರಾವತಿ"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Studies I"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "Karnataka was formed on which date?",
+        "hindi": "कर्नाटक का गठन किस तारीख को हुआ था?",
+        "kannada": "ಕರ್ನಾಟಕ ಯಾವ ದಿನಾಂಕದಂದು ರಚನೆಯಾಯಿತು?"
+      },
+      "options": {
+        "english": ["1st November 1956", "1st May 1960", "26th January 1950", "15th August 1947"],
+        "hindi": ["1 नवंबर 1956", "1 मई 1960", "26 जनवरी 1950", "15 अगस्त 1947"],
+        "kannada": ["1 ನವೆಂಬರ್ 1956", "1 ಮೇ 1960", "26 ಜನವರಿ 1950", "15 ಆಗಸ್ಟ್ 1947"]
+      },
+      "correctAnswer": 0,
+      "subject": "General Studies I"
+    }
+  ],
+  "ssc-chsl": [
+    {
+      "id": "q1",
+      "question": {
+        "english": "What is 15% of 200?",
+        "hindi": "200 का 15% क्या है?"
+      },
+      "options": {
+        "english": ["25", "30", "35", "40"],
+        "hindi": ["25", "30", "35", "40"]
+      },
+      "correctAnswer": 1,
+      "subject": "Quantitative Aptitude"
+    },
+    {
+      "id": "q2",
+      "question": {
+        "english": "Find the next letter: A, C, E, G, ?",
+        "hindi": "अगला अक्षर खोजें: A, C, E, G, ?"
+      },
+      "options": {
+        "english": ["H", "I", "J", "K"],
+        "hindi": ["H", "I", "J", "K"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Intelligence"
+    },
+    {
+      "id": "q3",
+      "question": {
+        "english": "Who wrote the National Anthem of India?",
+        "hindi": "भारत का राष्ट्रगान किसने लिखा?"
+      },
+      "options": {
+        "english": ["Bankim Chandra Chatterjee", "Rabindranath Tagore", "Sarojini Naidu", "Muhammad Iqbal"],
+        "hindi": ["बंकिम चंद्र चटर्जी", "रवींद्रनाथ टैगोर", "सरोजिनी नायडू", "मुहम्मद इकबाल"]
+      },
+      "correctAnswer": 1,
+      "subject": "General Awareness"
+    },
+    {
+      "id": "q4",
+      "question": {
+        "english": "Choose the correct synonym of 'VIVID':",
+        "hindi": "'VIVID' का सही पर्यायवाची चुनें:"
+      },
+      "options": {
+        "english": ["Dull", "Bright", "Dark", "Pale"],
+        "hindi": ["सुस्त", "चमकीला", "अंधेरा", "पीला"]
+      },
+      "correctAnswer": 1,
+      "subject": "English Language"
+    },
+    {
+      "id": "q5",
+      "question": {
+        "english": "The average of 5 numbers is 20. If one number is removed, the average becomes 15. What is the removed number?",
+        "hindi": "5 संख्याओं का औसत 20 है। यदि एक संख्या हटा दी जाए, तो औसत 15 हो जाता है। हटाई गई संख्या क्या है?"
+      },
+      "options": {
+        "english": ["30", "35", "40", "45"],
+        "hindi": ["30", "35", "40", "45"]
+      },
+      "correctAnswer": 2,
+      "subject": "Quantitative Aptitude"
+    }
+  ]
+}

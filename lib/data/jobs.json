@@ -9,11 +9,49 @@
     "vacancies": 12500,
     "examDate": "2026-06-15",
     "applicationDeadline": "2026-05-01",
+    "officialUrl": "https://ssc.nic.in",
+    "state": "all",
     "syllabus": [
       "General Intelligence & Reasoning",
       "General Awareness",
       "Quantitative Aptitude",
       "English Comprehension"
+    ],
+    "subjects": [
+      {
+        "name": "Quantitative Aptitude",
+        "topics": ["Number Systems", "Percentages", "Profit & Loss", "Simple & Compound Interest", "Ratio & Proportion", "Algebra", "Geometry", "Trigonometry", "Data Interpretation"],
+        "weightage": 25
+      },
+      {
+        "name": "General Intelligence & Reasoning",
+        "topics": ["Analogies", "Series", "Coding-Decoding", "Blood Relations", "Direction Sense", "Syllogism", "Puzzles", "Data Sufficiency"],
+        "weightage": 25
+      },
+      {
+        "name": "English Comprehension",
+        "topics": ["Reading Comprehension", "Vocabulary", "Grammar", "Sentence Completion", "Error Detection", "Idioms & Phrases"],
+        "weightage": 25
+      },
+      {
+        "name": "General Awareness",
+        "topics": ["Current Affairs", "History", "Geography", "Polity", "Economics", "Science", "Static GK"],
+        "weightage": 25
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://testbook.com/ssc-cgl-mock-test",
+        "studyMaterialUrl": "https://ncert.nic.in",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://testbook.com/ssc-cgl-mock-test-hindi",
+        "studyMaterialUrl": "https://ncert.nic.in/textbook.php?iehh1=0-14",
+        "label": "हिंदी संसाधन"
+      }
     ],
     "requirements": {
       "minAge": 18,
@@ -26,13 +64,47 @@
         "pwd": 42
       },
       "minEducation": "graduation",
-      "minPercentage": 50
+      "minPercentage": 50,
+      "requiredCertifications": []
     },
     "tips": [
       "Focus on time management - 200 questions in 60 minutes",
       "Practice previous year papers extensively",
       "Current affairs of last 6 months are crucial"
-    ]
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Age Relaxation",
+          "description": "Verify if you qualify for age relaxation under reserved categories (OBC/SC/ST/PwD)",
+          "actionUrl": "https://ssc.nic.in/Portal/AgeLimits"
+        },
+        {
+          "title": "Explore Similar Exams",
+          "description": "Consider RRB NTPC or State PSC exams with higher age limits",
+          "duration": "Immediate"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete Your Graduation",
+          "description": "Enroll in a recognized university program to obtain your degree",
+          "duration": "3-4 years"
+        },
+        {
+          "title": "Consider Distance Learning",
+          "description": "IGNOU offers flexible graduation programs recognized for government jobs",
+          "actionUrl": "https://ignou.ac.in"
+        }
+      ],
+      "percentage": [
+        {
+          "title": "Improve Academic Performance",
+          "description": "If still studying, focus on improving your grades",
+          "duration": "Ongoing"
+        }
+      ]
+    }
   },
   {
     "id": "upsc-cse",
@@ -44,11 +116,54 @@
     "vacancies": 1050,
     "examDate": "2026-05-26",
     "applicationDeadline": "2026-02-20",
+    "officialUrl": "https://upsc.gov.in",
+    "state": "all",
     "syllabus": [
       "General Studies Paper I-IV",
       "Optional Subject",
       "Essay Writing",
       "Ethics, Integrity & Aptitude"
+    ],
+    "subjects": [
+      {
+        "name": "General Studies I",
+        "topics": ["Indian Heritage & Culture", "History of India", "World History", "Indian Society", "Geography"],
+        "weightage": 20
+      },
+      {
+        "name": "General Studies II",
+        "topics": ["Governance", "Constitution", "Polity", "Social Justice", "International Relations"],
+        "weightage": 20
+      },
+      {
+        "name": "General Studies III",
+        "topics": ["Technology", "Economic Development", "Biodiversity", "Security", "Disaster Management"],
+        "weightage": 20
+      },
+      {
+        "name": "General Studies IV",
+        "topics": ["Ethics", "Integrity", "Aptitude", "Case Studies", "Emotional Intelligence"],
+        "weightage": 20
+      },
+      {
+        "name": "Optional Subject",
+        "topics": ["Choose one from 48 optional subjects"],
+        "weightage": 20
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://unacademy.com/upsc-mock-tests",
+        "studyMaterialUrl": "https://ncert.nic.in",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://drishtiias.com/hindi/mains-practice",
+        "studyMaterialUrl": "https://ncert.nic.in/textbook.php?iehh1=0-14",
+        "label": "हिंदी संसाधन"
+      }
     ],
     "requirements": {
       "minAge": 21,
@@ -62,6 +177,7 @@
       },
       "minEducation": "graduation",
       "minPercentage": 0,
+      "requiredCertifications": [],
       "attempts": {
         "general": 6,
         "obc": 9,
@@ -74,7 +190,30 @@
       "Start with NCERT books for foundation",
       "Daily newspaper reading is essential",
       "Answer writing practice is key to mains"
-    ]
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Age Relaxation Eligibility",
+          "description": "Verify category-based relaxation (OBC: +3 years, SC/ST: +5 years)",
+          "actionUrl": "https://upsc.gov.in/examinations"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete Your Graduation",
+          "description": "Any recognized degree is accepted for UPSC CSE",
+          "duration": "3-4 years"
+        }
+      ],
+      "attempts": [
+        {
+          "title": "Explore State PSC Exams",
+          "description": "State Public Service Commissions have separate attempt limits",
+          "actionUrl": "https://upsc.gov.in"
+        }
+      ]
+    }
   },
   {
     "id": "ibps-po",
@@ -86,12 +225,55 @@
     "vacancies": 8500,
     "examDate": "2026-10-15",
     "applicationDeadline": "2026-08-30",
+    "officialUrl": "https://ibps.in",
+    "state": "all",
     "syllabus": [
       "English Language",
       "Quantitative Aptitude",
       "Reasoning Ability",
       "Computer Aptitude",
       "General/Economy/Banking Awareness"
+    ],
+    "subjects": [
+      {
+        "name": "English Language",
+        "topics": ["Reading Comprehension", "Cloze Test", "Para Jumbles", "Error Detection", "Sentence Improvement"],
+        "weightage": 20
+      },
+      {
+        "name": "Quantitative Aptitude",
+        "topics": ["Number Series", "Data Interpretation", "Quadratic Equations", "Simplification", "Percentages"],
+        "weightage": 20
+      },
+      {
+        "name": "Reasoning Ability",
+        "topics": ["Puzzles", "Seating Arrangement", "Syllogism", "Coding-Decoding", "Blood Relations", "Inequality"],
+        "weightage": 20
+      },
+      {
+        "name": "Computer Aptitude",
+        "topics": ["Computer Fundamentals", "MS Office", "Internet", "Database", "Networking Basics"],
+        "weightage": 20
+      },
+      {
+        "name": "Banking Awareness",
+        "topics": ["Banking Terms", "RBI Functions", "Financial Institutions", "Government Schemes", "Current Banking News"],
+        "weightage": 20
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://oliveboard.in/ibps-po-mock-test",
+        "studyMaterialUrl": "https://ibps.in",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://gradeup.co/ibps-po-mock-test-hindi",
+        "studyMaterialUrl": "https://ibps.in",
+        "label": "हिंदी संसाधन"
+      }
     ],
     "requirements": {
       "minAge": 20,
@@ -104,13 +286,36 @@
         "pwd": 40
       },
       "minEducation": "graduation",
-      "minPercentage": 55
+      "minPercentage": 55,
+      "requiredCertifications": []
     },
     "tips": [
       "Banking awareness section needs special attention",
       "Speed and accuracy in Quant is crucial",
       "Practice computer-based tests regularly"
-    ]
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Age Relaxation",
+          "description": "Reserved categories get 3-5 years age relaxation",
+          "actionUrl": "https://ibps.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete Graduation",
+          "description": "Any degree from recognized university is accepted",
+          "duration": "3-4 years"
+        }
+      ],
+      "percentage": [
+        {
+          "title": "Improve Academic Score",
+          "description": "Minimum 55% is required in graduation for most banks"
+        }
+      ]
+    }
   },
   {
     "id": "rrb-ntpc",
@@ -122,11 +327,49 @@
     "vacancies": 35000,
     "examDate": "2026-08-20",
     "applicationDeadline": "2026-07-15",
+    "officialUrl": "https://rrbcdg.gov.in",
+    "state": "all",
     "syllabus": [
       "Mathematics",
       "General Intelligence & Reasoning",
       "General Awareness",
       "General Science"
+    ],
+    "subjects": [
+      {
+        "name": "Mathematics",
+        "topics": ["Number System", "BODMAS", "Decimals", "Fractions", "LCM HCF", "Ratio", "Percentage", "Mensuration", "Time & Work"],
+        "weightage": 30
+      },
+      {
+        "name": "General Intelligence & Reasoning",
+        "topics": ["Analogies", "Alphabetical Series", "Coding-Decoding", "Mathematical Operations", "Syllogism", "Venn Diagrams"],
+        "weightage": 30
+      },
+      {
+        "name": "General Awareness",
+        "topics": ["Current Affairs", "Indian History", "Indian Geography", "Indian Polity", "Economics"],
+        "weightage": 20
+      },
+      {
+        "name": "General Science",
+        "topics": ["Physics", "Chemistry", "Biology", "Environmental Science"],
+        "weightage": 20
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://testbook.com/rrb-ntpc-mock-test",
+        "studyMaterialUrl": "https://ncert.nic.in",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://testbook.com/rrb-ntpc-mock-test-hindi",
+        "studyMaterialUrl": "https://ncert.nic.in/textbook.php?iehh1=0-14",
+        "label": "हिंदी संसाधन"
+      }
     ],
     "requirements": {
       "minAge": 18,
@@ -139,12 +382,397 @@
         "pwd": 43
       },
       "minEducation": "12th",
-      "minPercentage": 45
+      "minPercentage": 45,
+      "requiredCertifications": []
     },
     "tips": [
       "Railway-specific GK is important",
       "Focus on Indian Geography and History",
       "Practice arithmetic and algebra daily"
-    ]
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Category-Based Relaxation",
+          "description": "OBC: +3 years, SC/ST: +5 years, PwD: +10 years",
+          "actionUrl": "https://rrbcdg.gov.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete 12th Standard",
+          "description": "12th pass from recognized board is minimum requirement",
+          "duration": "1-2 years"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mpsc-rajyaseva",
+    "name": "MPSC Rajyaseva",
+    "fullName": "Maharashtra Public Service Commission - State Services Examination",
+    "department": "Government of Maharashtra",
+    "description": "State civil services examination for various administrative posts in Maharashtra",
+    "salary": "₹56,100 - ₹1,77,500",
+    "vacancies": 450,
+    "examDate": "2026-04-20",
+    "applicationDeadline": "2026-03-01",
+    "officialUrl": "https://mpsc.gov.in",
+    "state": "maharashtra",
+    "syllabus": [
+      "Marathi & English Language",
+      "General Studies I & II",
+      "Aptitude & Reasoning",
+      "Interview"
+    ],
+    "subjects": [
+      {
+        "name": "Marathi Language",
+        "topics": ["Grammar", "Comprehension", "Essay Writing", "Precis Writing"],
+        "weightage": 15
+      },
+      {
+        "name": "English Language",
+        "topics": ["Grammar", "Comprehension", "Essay Writing", "Translation"],
+        "weightage": 15
+      },
+      {
+        "name": "General Studies I",
+        "topics": ["History of India & Maharashtra", "Geography", "Indian Polity", "Economics"],
+        "weightage": 35
+      },
+      {
+        "name": "General Studies II",
+        "topics": ["Science & Technology", "Environment", "Current Affairs", "Maharashtra State Knowledge"],
+        "weightage": 35
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://mpsc.gov.in/mock-tests",
+        "studyMaterialUrl": "https://mpsc.gov.in/syllabus",
+        "label": "English Resources"
+      },
+      {
+        "language": "marathi",
+        "mockTestUrl": "https://mpscworld.com/mock-tests-marathi",
+        "studyMaterialUrl": "https://mpscworld.com/study-material",
+        "label": "मराठी संसाधने"
+      }
+    ],
+    "requirements": {
+      "minAge": 19,
+      "maxAge": {
+        "general": 38,
+        "obc": 41,
+        "sc": 43,
+        "st": 43,
+        "ews": 38,
+        "pwd": 48
+      },
+      "minEducation": "graduation",
+      "minPercentage": 0,
+      "requiredCertifications": []
+    },
+    "tips": [
+      "Maharashtra-specific knowledge is crucial",
+      "Practice Marathi essay writing",
+      "Focus on current affairs of Maharashtra"
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Verify Age Relaxation",
+          "description": "Maharashtra offers generous age relaxation for reserved categories",
+          "actionUrl": "https://mpsc.gov.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete Your Degree",
+          "description": "Any graduation from recognized university is accepted",
+          "duration": "3-4 years"
+        }
+      ]
+    }
+  },
+  {
+    "id": "uppsc-pcs",
+    "name": "UPPSC PCS",
+    "fullName": "Uttar Pradesh Public Service Commission - Provincial Civil Services",
+    "department": "Government of Uttar Pradesh",
+    "description": "State-level civil services examination for UP administrative posts",
+    "salary": "₹44,900 - ₹1,42,400",
+    "vacancies": 650,
+    "examDate": "2026-05-10",
+    "applicationDeadline": "2026-03-15",
+    "officialUrl": "https://uppsc.up.nic.in",
+    "state": "uttar-pradesh",
+    "syllabus": [
+      "General Hindi",
+      "General Studies I & II",
+      "Optional Subject",
+      "Interview"
+    ],
+    "subjects": [
+      {
+        "name": "General Hindi",
+        "topics": ["Grammar", "Vocabulary", "Comprehension", "Essay", "Translation"],
+        "weightage": 20
+      },
+      {
+        "name": "General Studies I",
+        "topics": ["History", "Geography", "Polity", "Economics", "UP State Knowledge"],
+        "weightage": 30
+      },
+      {
+        "name": "General Studies II",
+        "topics": ["Science & Technology", "Reasoning", "Ethics", "Current Affairs"],
+        "weightage": 30
+      },
+      {
+        "name": "Optional Subject",
+        "topics": ["Choose from available optional subjects"],
+        "weightage": 20
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://uppsc.up.nic.in",
+        "studyMaterialUrl": "https://uppsc.up.nic.in/syllabus",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://drishtiias.com/uppsc-mock-tests-hindi",
+        "studyMaterialUrl": "https://uppsc.up.nic.in",
+        "label": "हिंदी संसाधन"
+      }
+    ],
+    "requirements": {
+      "minAge": 21,
+      "maxAge": {
+        "general": 40,
+        "obc": 43,
+        "sc": 45,
+        "st": 45,
+        "ews": 40,
+        "pwd": 55
+      },
+      "minEducation": "graduation",
+      "minPercentage": 0,
+      "requiredCertifications": []
+    },
+    "tips": [
+      "UP-specific current affairs are important",
+      "Hindi medium is preferred by most candidates",
+      "Focus on UP history and geography"
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Age Relaxation Rules",
+          "description": "UP has higher age limits compared to central services",
+          "actionUrl": "https://uppsc.up.nic.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete Graduation",
+          "description": "Any degree from UGC recognized university",
+          "duration": "3-4 years"
+        }
+      ]
+    }
+  },
+  {
+    "id": "kpsc-kas",
+    "name": "KPSC KAS",
+    "fullName": "Karnataka Public Service Commission - Karnataka Administrative Service",
+    "department": "Government of Karnataka",
+    "description": "State civil services examination for Karnataka administrative posts",
+    "salary": "₹52,650 - ₹1,66,450",
+    "vacancies": 350,
+    "examDate": "2026-06-01",
+    "applicationDeadline": "2026-04-10",
+    "officialUrl": "https://kpsc.kar.nic.in",
+    "state": "karnataka",
+    "syllabus": [
+      "General Kannada & English",
+      "General Studies I & II",
+      "Optional Subject",
+      "Personality Test"
+    ],
+    "subjects": [
+      {
+        "name": "General Kannada",
+        "topics": ["Grammar", "Comprehension", "Essay Writing", "Kannada Literature"],
+        "weightage": 15
+      },
+      {
+        "name": "English Language",
+        "topics": ["Grammar", "Comprehension", "Essay Writing"],
+        "weightage": 15
+      },
+      {
+        "name": "General Studies I",
+        "topics": ["Karnataka History", "Indian History", "Geography", "Polity", "Economics"],
+        "weightage": 35
+      },
+      {
+        "name": "General Studies II",
+        "topics": ["Science", "Technology", "Environment", "Current Affairs"],
+        "weightage": 35
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://kpsc.kar.nic.in",
+        "studyMaterialUrl": "https://kpsc.kar.nic.in/syllabus",
+        "label": "English Resources"
+      },
+      {
+        "language": "kannada",
+        "mockTestUrl": "https://spardhavijetha.com/mock-tests",
+        "studyMaterialUrl": "https://spardhavijetha.com",
+        "label": "ಕನ್ನಡ ಸಂಪನ್ಮೂಲಗಳು"
+      }
+    ],
+    "requirements": {
+      "minAge": 21,
+      "maxAge": {
+        "general": 35,
+        "obc": 38,
+        "sc": 40,
+        "st": 40,
+        "ews": 35,
+        "pwd": 45
+      },
+      "minEducation": "graduation",
+      "minPercentage": 0,
+      "requiredCertifications": []
+    },
+    "tips": [
+      "Karnataka state knowledge is essential",
+      "Kannada language paper is compulsory",
+      "Focus on Karnataka's history and culture"
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Verify Category Relaxation",
+          "description": "Check age relaxation based on your reservation category",
+          "actionUrl": "https://kpsc.kar.nic.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Obtain a Degree",
+          "description": "Any UGC recognized graduation is acceptable",
+          "duration": "3-4 years"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ssc-chsl",
+    "name": "SSC CHSL",
+    "fullName": "Staff Selection Commission - Combined Higher Secondary Level",
+    "department": "Government of India",
+    "description": "Recruitment for LDC, DEO, PA/SA posts requiring 12th pass qualification",
+    "salary": "₹25,500 - ₹81,100",
+    "vacancies": 4500,
+    "examDate": "2026-07-10",
+    "applicationDeadline": "2026-06-01",
+    "officialUrl": "https://ssc.nic.in",
+    "state": "all",
+    "syllabus": [
+      "General Intelligence",
+      "English Language",
+      "Quantitative Aptitude",
+      "General Awareness"
+    ],
+    "subjects": [
+      {
+        "name": "General Intelligence",
+        "topics": ["Analogies", "Classification", "Series", "Coding-Decoding", "Puzzles", "Matrix"],
+        "weightage": 25
+      },
+      {
+        "name": "English Language",
+        "topics": ["Spot the Error", "Fill in the Blanks", "Synonyms/Antonyms", "Spelling", "Idioms", "Comprehension"],
+        "weightage": 25
+      },
+      {
+        "name": "Quantitative Aptitude",
+        "topics": ["Number System", "Computation", "Decimals", "Fractions", "Percentages", "Ratio", "Average", "Interest"],
+        "weightage": 25
+      },
+      {
+        "name": "General Awareness",
+        "topics": ["History", "Culture", "Geography", "Economics", "Polity", "Science", "Current Affairs"],
+        "weightage": 25
+      }
+    ],
+    "languageResources": [
+      {
+        "language": "english",
+        "mockTestUrl": "https://testbook.com/ssc-chsl-mock-test",
+        "studyMaterialUrl": "https://ncert.nic.in",
+        "label": "English Resources"
+      },
+      {
+        "language": "hindi",
+        "mockTestUrl": "https://testbook.com/ssc-chsl-mock-test-hindi",
+        "studyMaterialUrl": "https://ncert.nic.in/textbook.php?iehh1=0-14",
+        "label": "हिंदी संसाधन"
+      }
+    ],
+    "requirements": {
+      "minAge": 18,
+      "maxAge": {
+        "general": 27,
+        "obc": 30,
+        "sc": 32,
+        "st": 32,
+        "ews": 27,
+        "pwd": 37
+      },
+      "minEducation": "12th",
+      "minPercentage": 0,
+      "requiredCertifications": ["CCC Certificate"]
+    },
+    "tips": [
+      "Typing speed is crucial for DEO posts",
+      "Practice 10th/12th level math",
+      "Focus on basic English grammar"
+    ],
+    "ineligibilitySteps": {
+      "age": [
+        {
+          "title": "Check Age Relaxation",
+          "description": "Reserved categories get 3-5 years relaxation",
+          "actionUrl": "https://ssc.nic.in"
+        }
+      ],
+      "education": [
+        {
+          "title": "Complete 12th Standard",
+          "description": "12th pass from recognized board is required",
+          "duration": "1-2 years"
+        }
+      ],
+      "certification": [
+        {
+          "title": "Obtain CCC Certificate",
+          "description": "CCC (Course on Computer Concepts) from NIELIT is mandatory for many posts",
+          "actionUrl": "https://student.nielit.gov.in",
+          "duration": "3 months"
+        }
+      ]
+    }
   }
 ]

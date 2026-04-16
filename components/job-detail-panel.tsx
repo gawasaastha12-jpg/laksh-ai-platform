@@ -14,9 +14,20 @@ import {
   IndianRupee,
   Users,
   Building2,
+  ExternalLink,
+  ChevronRight,
+  FileText,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { EligibilityResult } from "@/lib/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { EligibilityResult, Language } from "@/lib/types";
+import { useProfile } from "@/lib/profile-context";
 import { cn } from "@/lib/utils";
 
 interface JobDetailPanelProps {
@@ -73,9 +84,12 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
 }
 
 export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
+  const { profile } = useProfile();
+
   if (!result) return null;
 
   const { job, status, probability, qualifications, gaps } = result;
+  const userLanguage = profile?.language || "english";
 
   const statusConfig = {
     eligible: {
@@ -100,6 +114,28 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
 
   const config = statusConfig[status];
   const StatusIcon = config.icon;
+
+  // Determine ineligibility reasons for steps
+  const getIneligibilityReason = (): string | null => {
+    for (const gap of gaps) {
+      if (gap.toLowerCase().includes("age")) return "age";
+      if (gap.toLowerCase().includes("education") || gap.toLowerCase().includes("graduation") || gap.toLowerCase().includes("degree")) return "education";
+      if (gap.toLowerCase().includes("percentage")) return "percentage";
+      if (gap.toLowerCase().includes("certification")) return "certification";
+      if (gap.toLowerCase().includes("attempt")) return "attempts";
+    }
+    return null;
+  };
+
+  const ineligibilityReason = getIneligibilityReason();
+  const eligibilitySteps = ineligibilityReason && job.ineligibilitySteps?.[ineligibilityReason] 
+    ? job.ineligibilitySteps[ineligibilityReason] 
+    : [];
+
+  // Get language-specific resources
+  const languageResource = job.languageResources?.find(
+    (r) => r.language === userLanguage
+  ) || job.languageResources?.[0];
 
   return (
     <AnimatePresence>
@@ -150,6 +186,15 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
               </p>
             </div>
           </div>
+
+          {/* Apply Button */}
+          <Button
+            className="w-full mt-4 gap-2"
+            onClick={() => window.open(job.officialUrl, "_blank", "noopener,noreferrer")}
+          >
+            Apply on Official Website
+            <ExternalLink className="h-4 w-4" />
+          </Button>
         </div>
 
         {/* Content */}
@@ -192,7 +237,7 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
             </div>
           </div>
 
-          {/* Result Countdown */}
+          {/* Exam Countdown */}
           <div>
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <Clock className="h-5 w-5 text-primary" />
@@ -201,7 +246,7 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
             <CountdownTimer targetDate={job.examDate} />
           </div>
 
-          {/* Why You Qualify */}
+          {/* Why You Qualify / Don't Qualify */}
           {qualifications.length > 0 && (
             <div>
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -225,14 +270,14 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
             </div>
           )}
 
-          {/* Gaps to Address */}
-          {gaps.length > 0 && (
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-[oklch(0.75_0.15_85)]" />
-                Gaps to Address
+          {/* Why You Are Not Eligible (Ineligibility Diagnosis) */}
+          {status === "ineligible" && gaps.length > 0 && (
+            <div className="p-4 rounded-xl bg-[oklch(0.55_0.2_25)]/10 border border-[oklch(0.55_0.2_25)]/30">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-[oklch(0.55_0.2_25)]">
+                <XCircle className="h-5 w-5" />
+                Why You Are Not Eligible
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 mb-4">
                 {gaps.map((item, index) => (
                   <motion.li
                     key={index}
@@ -246,29 +291,140 @@ export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
                   </motion.li>
                 ))}
               </ul>
+
+              {/* Steps to Become Eligible */}
+              {eligibilitySteps.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-[oklch(0.55_0.2_25)]/30">
+                  <h4 className="font-semibold mb-3 flex items-center gap-2 text-foreground">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    Steps to Become Eligible
+                  </h4>
+                  <Accordion type="single" collapsible className="w-full">
+                    {eligibilitySteps.map((step, index) => (
+                      <AccordionItem key={index} value={`step-${index}`} className="border-b-0">
+                        <AccordionTrigger className="text-sm py-3 hover:no-underline">
+                          <span className="flex items-center gap-2">
+                            <span className="h-6 w-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                              {index + 1}
+                            </span>
+                            {step.title}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-sm text-muted-foreground pl-8">
+                          <p className="mb-2">{step.description}</p>
+                          {step.duration && (
+                            <p className="text-xs text-primary mb-2">
+                              Duration: {step.duration}
+                            </p>
+                          )}
+                          {step.actionUrl && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="gap-1"
+                              onClick={() => window.open(step.actionUrl, "_blank")}
+                            >
+                              Learn More
+                              <ExternalLink className="h-3 w-3" />
+                            </Button>
+                          )}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+              )}
             </div>
           )}
 
-          {/* Exam Syllabus */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-primary" />
-              Exam Syllabus
-            </h3>
-            <div className="space-y-2">
-              {job.syllabus.map((topic, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-3 rounded-lg bg-secondary text-sm"
-                >
-                  {topic}
-                </motion.div>
-              ))}
+          {/* Near-Eligible Gaps */}
+          {status === "near-eligible" && gaps.length > 0 && (
+            <div className="p-4 rounded-xl bg-[oklch(0.75_0.15_85)]/10 border border-[oklch(0.75_0.15_85)]/30">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-[oklch(0.75_0.15_85)]">
+                <AlertTriangle className="h-5 w-5" />
+                Gaps to Address
+              </h3>
+              <ul className="space-y-2">
+                {gaps.map((item, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-start gap-3 text-sm"
+                  >
+                    <AlertTriangle className="h-4 w-4 text-[oklch(0.75_0.15_85)] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
             </div>
-          </div>
+          )}
+
+          {/* Syllabus & Subjects */}
+          {job.subjects && job.subjects.length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Syllabus & Subjects
+              </h3>
+              <Accordion type="single" collapsible className="w-full">
+                {job.subjects.map((subject, index) => (
+                  <AccordionItem key={index} value={`subject-${index}`}>
+                    <AccordionTrigger className="text-sm hover:no-underline">
+                      <div className="flex items-center justify-between w-full pr-4">
+                        <span>{subject.name}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {subject.weightage}% weightage
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-1 pl-4">
+                        {subject.topics.map((topic, topicIndex) => (
+                          <li
+                            key={topicIndex}
+                            className="text-sm text-muted-foreground flex items-center gap-2"
+                          >
+                            <ChevronRight className="h-3 w-3 text-primary" />
+                            {topic}
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          )}
+
+          {/* Language-Specific Resources */}
+          {languageResource && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                {languageResource.label}
+              </h3>
+              <div className="space-y-3">
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  onClick={() => window.open(languageResource.mockTestUrl, "_blank")}
+                >
+                  <span>Free Mock Tests</span>
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  onClick={() => window.open(languageResource.studyMaterialUrl, "_blank")}
+                >
+                  <span>Study Materials & PDFs</span>
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Preparation Tips */}
           <div>
