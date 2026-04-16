@@ -1,0 +1,150 @@
+[
+  {
+    "id": "ssc-cgl",
+    "name": "SSC CGL",
+    "fullName": "Staff Selection Commission - Combined Graduate Level",
+    "department": "Government of India",
+    "description": "Combined Graduate Level examination for various Group B and C posts",
+    "salary": "₹47,600 - ₹1,51,100",
+    "vacancies": 12500,
+    "examDate": "2026-06-15",
+    "applicationDeadline": "2026-05-01",
+    "syllabus": [
+      "General Intelligence & Reasoning",
+      "General Awareness",
+      "Quantitative Aptitude",
+      "English Comprehension"
+    ],
+    "requirements": {
+      "minAge": 18,
+      "maxAge": {
+        "general": 32,
+        "obc": 35,
+        "sc": 37,
+        "st": 37,
+        "ews": 32,
+        "pwd": 42
+      },
+      "minEducation": "graduation",
+      "minPercentage": 50
+    },
+    "tips": [
+      "Focus on time management - 200 questions in 60 minutes",
+      "Practice previous year papers extensively",
+      "Current affairs of last 6 months are crucial"
+    ]
+  },
+  {
+    "id": "upsc-cse",
+    "name": "UPSC CSE",
+    "fullName": "Union Public Service Commission - Civil Services Examination",
+    "department": "Government of India",
+    "description": "Premier examination for IAS, IPS, IFS and other civil services",
+    "salary": "₹56,100 - ₹2,50,000",
+    "vacancies": 1050,
+    "examDate": "2026-05-26",
+    "applicationDeadline": "2026-02-20",
+    "syllabus": [
+      "General Studies Paper I-IV",
+      "Optional Subject",
+      "Essay Writing",
+      "Ethics, Integrity & Aptitude"
+    ],
+    "requirements": {
+      "minAge": 21,
+      "maxAge": {
+        "general": 32,
+        "obc": 35,
+        "sc": 37,
+        "st": 37,
+        "ews": 32,
+        "pwd": 42
+      },
+      "minEducation": "graduation",
+      "minPercentage": 0,
+      "attempts": {
+        "general": 6,
+        "obc": 9,
+        "sc": -1,
+        "st": -1,
+        "ews": 6
+      }
+    },
+    "tips": [
+      "Start with NCERT books for foundation",
+      "Daily newspaper reading is essential",
+      "Answer writing practice is key to mains"
+    ]
+  },
+  {
+    "id": "ibps-po",
+    "name": "IBPS PO",
+    "fullName": "Institute of Banking Personnel Selection - Probationary Officer",
+    "department": "Public Sector Banks",
+    "description": "Recruitment for Probationary Officers in various public sector banks",
+    "salary": "₹52,000 - ₹89,000",
+    "vacancies": 8500,
+    "examDate": "2026-10-15",
+    "applicationDeadline": "2026-08-30",
+    "syllabus": [
+      "English Language",
+      "Quantitative Aptitude",
+      "Reasoning Ability",
+      "Computer Aptitude",
+      "General/Economy/Banking Awareness"
+    ],
+    "requirements": {
+      "minAge": 20,
+      "maxAge": {
+        "general": 30,
+        "obc": 33,
+        "sc": 35,
+        "st": 35,
+        "ews": 30,
+        "pwd": 40
+      },
+      "minEducation": "graduation",
+      "minPercentage": 55
+    },
+    "tips": [
+      "Banking awareness section needs special attention",
+      "Speed and accuracy in Quant is crucial",
+      "Practice computer-based tests regularly"
+    ]
+  },
+  {
+    "id": "rrb-ntpc",
+    "name": "RRB NTPC",
+    "fullName": "Railway Recruitment Board - Non-Technical Popular Categories",
+    "department": "Indian Railways",
+    "description": "Recruitment for various non-technical posts in Indian Railways",
+    "salary": "₹35,400 - ₹1,12,400",
+    "vacancies": 35000,
+    "examDate": "2026-08-20",
+    "applicationDeadline": "2026-07-15",
+    "syllabus": [
+      "Mathematics",
+      "General Intelligence & Reasoning",
+      "General Awareness",
+      "General Science"
+    ],
+    "requirements": {
+      "minAge": 18,
+      "maxAge": {
+        "general": 33,
+        "obc": 36,
+        "sc": 38,
+        "st": 38,
+        "ews": 33,
+        "pwd": 43
+      },
+      "minEducation": "12th",
+      "minPercentage": 45
+    },
+    "tips": [
+      "Railway-specific GK is important",
+      "Focus on Indian Geography and History",
+      "Practice arithmetic and algebra daily"
+    ]
+  }
+]
