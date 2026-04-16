@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Yogy - AI-Powered Government Job Eligibility Platform',
+  title: 'Laksh - AI-Powered Government Job Eligibility Platform',
   description: 'From 50-page PDFs to a 10-second AI verdict. Check your eligibility for SSC, UPSC, IBPS, and Railway exams instantly.',
   generator: 'v0.app',
   keywords: ['government jobs', 'SSC CGL', 'UPSC', 'IBPS PO', 'RRB NTPC', 'eligibility checker', 'career guidance'],

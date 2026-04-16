@@ -13,8 +13,8 @@ interface ProfileContextType {
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'yogy_profile';
-const ONBOARDED_KEY = 'yogy_onboarded';
+const STORAGE_KEY = 'laksh_profile';
+const ONBOARDED_KEY = 'laksh_onboarded';
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfileState] = useState<UserProfile | null>(null);

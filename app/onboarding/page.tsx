@@ -80,8 +80,8 @@ const certificationOptions = [
   "ITI Certificate",
 ];
 
-const STORAGE_KEY = 'yogy_profile';
-const ONBOARDED_KEY = 'yogy_onboarded';
+const STORAGE_KEY = 'laksh_profile';
+const ONBOARDED_KEY = 'laksh_onboarded';
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -172,7 +172,7 @@ export default function OnboardingPage() {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
             <Sparkles className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="font-bold text-xl">Yogy</span>
+          <span className="font-bold text-xl">Laksh</span>
         </div>
 
         <div className="flex-1">
@@ -236,7 +236,7 @@ export default function OnboardingPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="font-bold">Yogy</span>
+            <span className="font-bold">Laksh</span>
           </div>
         </div>
 

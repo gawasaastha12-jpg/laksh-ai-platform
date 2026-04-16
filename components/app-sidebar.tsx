@@ -60,7 +60,7 @@ export function AppSidebar() {
           transition={{ duration: 0.2 }}
           className="font-bold text-xl text-sidebar-foreground overflow-hidden whitespace-nowrap"
         >
-          Yogy
+          Laksh
         </motion.span>
       </div>
 

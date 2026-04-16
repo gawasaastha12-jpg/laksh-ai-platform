@@ -42,7 +42,7 @@ const features = [
 const stats = [
   { value: "20%", label: "Rejection rate due to eligibility errors" },
   { value: "50+", label: "Pages in average exam notification" },
-  { value: "10s", label: "Time to check with Yogy" },
+  { value: "10s", label: "Time to check with Laksh" },
   { value: "4+", label: "Major exams covered" }
 ];
 
@@ -56,7 +56,7 @@ export default function LandingPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-bold text-xl">Yogy</span>
+            <span className="font-bold text-xl">Laksh</span>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/onboarding">
@@ -177,7 +177,7 @@ export default function LandingPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Choose Yogy?
+              Why Choose Laksh?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Built specifically for Indian government job aspirants with all the nuances considered
@@ -341,7 +341,7 @@ export default function LandingPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="font-semibold">Yogy</span>
+            <span className="font-semibold">Laksh</span>
           </div>
           <p className="text-sm text-muted-foreground">
             Built with care for Indian government job aspirants
