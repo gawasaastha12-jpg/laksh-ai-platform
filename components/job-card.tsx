@@ -1,96 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Calendar, Users, IndianRupee } from "lucide-react";
-import { EligibilityResult } from "@/lib/types";
+import { Building2, IndianRupee, AlertCircle, CheckCircle2, ChevronRight, XCircle } from "lucide-react";
+import { EligibilityResult } from "@/lib/eligibility";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 interface JobCardProps {
   result: EligibilityResult;
   onClick: () => void;
 }
 
-function CircularProgress({
-  value,
-  size = 60,
-  strokeWidth = 6,
-  status,
-}: {
-  value: number;
-  size?: number;
-  strokeWidth?: number;
-  status: "eligible" | "near-eligible" | "ineligible";
-}) {
-  const radius = (size - strokeWidth) / 2;
-  const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (value / 100) * circumference;
-
-  const statusColors = {
-    eligible: "stroke-[oklch(0.65_0.2_145)]",
-    "near-eligible": "stroke-[oklch(0.75_0.15_85)]",
-    ineligible: "stroke-[oklch(0.55_0.2_25)]",
-  };
-
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg className="transform -rotate-90" width={size} height={size}>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={strokeWidth}
-          className="text-secondary"
-        />
-        <motion.circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          className={statusColors[status]}
-          initial={{ strokeDashoffset: circumference }}
-          animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          style={{
-            strokeDasharray: circumference,
-          }}
-        />
-      </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-sm font-bold">{value}%</span>
-      </div>
-    </div>
-  );
-}
-
 export function JobCard({ result, onClick }: JobCardProps) {
-  const { job, status, probability } = result;
+  const { job, status, reasons, roadmap } = result;
 
-  const statusConfig = {
-    eligible: {
-      label: "Eligible",
-      bg: "bg-[oklch(0.65_0.2_145)]/10",
-      text: "text-[oklch(0.65_0.2_145)]",
-      border: "border-[oklch(0.65_0.2_145)]/30",
-    },
-    "near-eligible": {
-      label: "Near Eligible",
-      bg: "bg-[oklch(0.75_0.15_85)]/10",
-      text: "text-[oklch(0.75_0.15_85)]",
-      border: "border-[oklch(0.75_0.15_85)]/30",
-    },
-    ineligible: {
-      label: "Ineligible",
-      bg: "bg-[oklch(0.55_0.2_25)]/10",
-      text: "text-[oklch(0.55_0.2_25)]",
-      border: "border-[oklch(0.55_0.2_25)]/30",
-    },
-  };
-
-  const config = statusConfig[status];
+  const isEligible = status === "ELIGIBLE";
 
   return (
     <motion.div
@@ -98,64 +22,72 @@ export function JobCard({ result, onClick }: JobCardProps) {
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       className={cn(
-        "p-6 rounded-2xl bg-card border cursor-pointer transition-all",
-        "hover:shadow-lg hover:shadow-primary/5",
-        config.border
+        "p-6 rounded-2xl bg-card border cursor-pointer transition-all flex flex-col h-full",
+        "hover:shadow-lg",
+        isEligible 
+          ? "border-status-eligible/50 hover:shadow-status-eligible/10" 
+          : "border-destructive/50 hover:shadow-destructive/10"
       )}
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-4 gap-4">
         <div>
-          <h3 className="text-lg font-bold mb-1">{job.name}</h3>
+          <h3 className="text-lg font-bold mb-1 line-clamp-2">{job.title}</h3>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Building2 className="h-4 w-4" />
-            <span>{job.department}</span>
+            <span>{job.board}</span>
           </div>
         </div>
-        <CircularProgress value={probability} status={status} />
+        <div className="flex-shrink-0">
+          {isEligible ? (
+             <CheckCircle2 className="h-8 w-8 text-status-eligible" />
+          ) : (
+             <XCircle className="h-8 w-8 text-destructive" />
+          )}
+        </div>
       </div>
 
       {/* Status Badge */}
       <div className="mb-4">
         <span
           className={cn(
-            "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium",
-            config.bg,
-            config.text
+            "inline-flex items-center px-3 py-1 rounded-full text-xs font-bold",
+            isEligible 
+              ? "bg-status-eligible/10 text-status-eligible border border-status-eligible/30"
+              : "bg-destructive/10 text-destructive border border-destructive/30"
           )}
         >
-          {config.label}
+          {status}
         </span>
       </div>
 
       {/* Info Grid */}
-      <div className="grid grid-cols-2 gap-3 text-sm">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <IndianRupee className="h-4 w-4" />
-          <span className="truncate">{job.salary.split("-")[0].trim()}</span>
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Users className="h-4 w-4" />
-          <span>{job.vacancies.toLocaleString()} posts</span>
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground col-span-2">
-          <Calendar className="h-4 w-4" />
-          <span>
-            Exam:{" "}
-            {new Date(job.examDate).toLocaleDateString("en-IN", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-        </div>
+      <div className="text-sm mb-4 flex-grow">
+        <p className="text-muted-foreground line-clamp-2 mb-2">{job.description}</p>
+        {!isEligible && reasons.length > 0 && (
+          <div className="mt-4 p-3 bg-destructive/5 rounded-lg border border-destructive/20">
+             <div className="flex items-center gap-2 text-destructive font-semibold mb-1">
+               <AlertCircle className="h-4 w-4" />
+               Reason:
+             </div>
+             <ul className="list-disc list-inside text-destructive/80 text-xs space-y-1">
+               {reasons.map((r, i) => <li key={i}>{r}</li>)}
+             </ul>
+          </div>
+        )}
       </div>
 
-      {/* Main Reason */}
-      <div className="mt-4 pt-4 border-t border-border">
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {result.reasons[0]}
-        </p>
+      {/* Footer Button / Action */}
+      <div className="mt-auto pt-4 border-t border-border flex items-center justify-between">
+        {!isEligible && roadmap.length > 0 ? (
+          <Button variant="outline" className="w-full text-xs font-semibold text-primary border-primary/50 hover:bg-primary/10">
+            Roadmap to Eligible
+          </Button>
+        ) : (
+          <div className="flex items-center text-sm font-medium text-primary ml-auto group">
+            View Syllabus <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </div>
+        )}
       </div>
     </motion.div>
   );

@@ -1,208 +1,115 @@
-import { UserProfile, Job, EligibilityResult, EligibilityStatus } from './types';
-import jobsData from './data/jobs.json';
+import { UserProfile, EligibilityStatus } from "./types";
+import { mockJobs, Job } from "./mock/jobs";
+
+export interface EligibilityResult {
+  job: Job;
+  status: EligibilityStatus;
+  reasons: string[];
+  roadmap: string[];
+}
 
 export function checkEligibility(profile: UserProfile): EligibilityResult[] {
-  const jobs = jobsData as Job[];
+  if (!profile) return [];
   
-  return jobs.map(job => {
+  const results = mockJobs.map((job) => {
+    let isEligible = true;
     const reasons: string[] = [];
-    const qualifications: string[] = [];
-    const gaps: string[] = [];
-    let score = 100;
+    const roadmap: string[] = [];
+
+    // 1. Check State Domicile
+    if (job.stateReq !== 'ALL' && job.stateReq.toLowerCase() !== (profile.stateDomicile || '').toLowerCase()) {
+      isEligible = false;
+      reasons.push(`State Domicile mismatch. Required: ${job.stateReq}`);
+    }
+
+    // 2. Check Age
+    // Map categories depending on how it's saved. e.g. 'general' -> 'UR', 'obc' -> 'OBC'
+    const categoryMapping: Record<string, keyof typeof job.ageLimits> = {
+      'general': 'UR', 'obc': 'OBC', 'sc': 'SC', 'st': 'ST', 'ews': 'EWS', 'pwd': 'UR'
+    };
+    const catFormatted = categoryMapping[profile.category] || 'UR';
+    const maxAge = job.ageLimits[catFormatted as keyof typeof job.ageLimits];
     
-    // Check age eligibility
-    const maxAge = job.requirements.maxAge[profile.category];
     if (profile.age > maxAge) {
-      reasons.push(`Age limit exceeded (Max: ${maxAge} for ${profile.category.toUpperCase()})`);
-      score -= 50;
-      gaps.push('Age exceeds maximum limit');
-    } else if (profile.age === maxAge) {
-      qualifications.push('Just within age limit');
-      reasons.push('Within age limit (barely)');
-    } else {
-      qualifications.push(`Within age limit (${maxAge - profile.age} years margin)`);
+      isEligible = false;
+      reasons.push(`Age Exceeded limit. Max for your category: ${maxAge}, Your Age: ${profile.age}`);
     }
-    
-    if (profile.age < job.requirements.minAge) {
-      reasons.push(`Below minimum age (Min: ${job.requirements.minAge})`);
-      score -= 50;
-      gaps.push('Below minimum age requirement');
-    }
-    
-    // Check education eligibility
-    const educationLevels = { '10th': 1, '12th': 2, 'graduation': 3 };
-    const userEducationLevel = profile.degree.toLowerCase().includes('graduate') || 
-                               profile.degree.toLowerCase().includes('bachelor') ||
-                               profile.degree.toLowerCase().includes('b.') ? 3 :
-                               profile.degree.toLowerCase().includes('12') || 
-                               profile.degree.toLowerCase().includes('intermediate') ||
-                               profile.degree.toLowerCase().includes('hsc') ? 2 : 1;
-    
-    const requiredLevel = educationLevels[job.requirements.minEducation];
-    
-    if (userEducationLevel < requiredLevel) {
-      reasons.push(`${job.requirements.minEducation} required`);
-      score -= 40;
-      gaps.push(`Need to complete ${job.requirements.minEducation}`);
-    } else {
-      qualifications.push(`Education requirement met (${profile.degree})`);
-    }
-    
-    // Check percentage
-    if (job.requirements.minPercentage > 0) {
-      if (profile.percentage < job.requirements.minPercentage) {
-        reasons.push(`Minimum ${job.requirements.minPercentage}% required (You have: ${profile.percentage}%)`);
-        score -= 30;
-        gaps.push('Percentage below requirement');
-      } else {
-        qualifications.push(`Percentage requirement met (${profile.percentage}%)`);
+
+    // 3. Check Education
+    if (job.educationReq.length > 0) {
+      const degreeLower = (profile.degree || '').toLowerCase();
+      const hasEducation = job.educationReq.some((req) => {
+        const rLower = req.toLowerCase();
+        if (degreeLower.includes(rLower) || rLower.includes(degreeLower)) return true;
+        if (degreeLower.includes('bachelor') && rLower.includes('bachelor')) return true;
+        if (degreeLower.includes('master') && rLower.includes('master')) return true;
+        if (degreeLower.includes('12th') && rLower.includes('12th')) return true;
+        if (degreeLower.includes('10th') && rLower.includes('10th')) return true;
+        if (degreeLower.includes('b.tech') && rLower.includes('tech')) return true;
+        if (degreeLower.includes('b.e.') && rLower.includes('tech')) return true;
+        return false;
+      });
+
+      if (!hasEducation) {
+        isEligible = false;
+        reasons.push(`Education Mismatch. Required one of: ${job.educationReq.join(', ')}`);
+        roadmap.push(`Pursue ${job.educationReq[0]}`);
       }
     }
-    
-    // Category advantage
-    if (profile.category !== 'general') {
-      qualifications.push(`Reserved category benefit (${profile.category.toUpperCase()})`);
-      score += 10;
+    // 4. Check Subjects
+    if (job.subjectsReq.length > 0) {
+      const hasSubject = job.subjectsReq.some(subj => profile.subjects.includes(subj));
+      if (!hasSubject) {
+        isEligible = false;
+        reasons.push(`Subject Mismatch. Required one of: ${job.subjectsReq.join(', ')}`);
+        roadmap.push(`Complete a foundation course / bridge program in ${job.subjectsReq[0]}`);
+      }
     }
-    
-    // Skills bonus
-    const relevantSkills = profile.skills.filter(skill => 
-      job.syllabus.some(topic => 
-        topic.toLowerCase().includes(skill.toLowerCase()) ||
-        skill.toLowerCase().includes(topic.toLowerCase().split(' ')[0])
-      )
-    );
-    
-    if (relevantSkills.length > 0) {
-      qualifications.push(`Relevant skills: ${relevantSkills.join(', ')}`);
-      score += relevantSkills.length * 5;
-    }
-    
-    // Certifications bonus
-    if (profile.certifications.length > 0) {
-      qualifications.push(`Certifications: ${profile.certifications.length} held`);
-      score += profile.certifications.length * 3;
-    }
-    
-    // Calculate final status
-    let status: EligibilityStatus;
-    const probability = Math.min(Math.max(score, 0), 100);
-    
-    if (score >= 70) {
-      status = 'eligible';
-    } else if (score >= 40) {
-      status = 'near-eligible';
-    } else {
-      status = 'ineligible';
-    }
+
+    const resultStatus: EligibilityStatus = isEligible ? 'ELIGIBLE' : 'NOT ELIGIBLE';
     
     return {
       job,
-      status,
-      probability,
-      reasons: reasons.length > 0 ? reasons : ['Meets all basic requirements'],
-      qualifications,
-      gaps
+      status: resultStatus,
+      reasons,
+      roadmap
     };
   });
-}
 
-export function getRecommendedCourses(weaknesses: string[]) {
-  const courses = [
-    {
-      id: 'nielit-ccc',
-      name: 'NIELIT CCC',
-      provider: 'NIELIT',
-      duration: '80 hours',
-      description: 'Course on Computer Concepts - Essential for government job computer literacy',
-      link: 'https://student.nielit.gov.in/'
-    },
-    {
-      id: 'swayam-english',
-      name: 'English Communication Skills',
-      provider: 'SWAYAM',
-      duration: '12 weeks',
-      description: 'Improve English comprehension and communication for competitive exams',
-      link: 'https://swayam.gov.in/'
-    },
-    {
-      id: 'swayam-quant',
-      name: 'Quantitative Aptitude',
-      provider: 'SWAYAM',
-      duration: '8 weeks',
-      description: 'Master mathematical concepts required for SSC, Banking, and Railway exams',
-      link: 'https://swayam.gov.in/'
-    },
-    {
-      id: 'nptel-reasoning',
-      name: 'Logical Reasoning & Aptitude',
-      provider: 'NPTEL',
-      duration: '12 weeks',
-      description: 'Develop logical and analytical reasoning skills',
-      link: 'https://nptel.ac.in/'
-    },
-    {
-      id: 'ignou-gk',
-      name: 'General Knowledge & Current Affairs',
-      provider: 'IGNOU',
-      duration: '6 months',
-      description: 'Comprehensive coverage of GK topics for competitive exams',
-      link: 'https://ignou.ac.in/'
-    },
-    {
-      id: 'unacademy-banking',
-      name: 'Banking Awareness',
-      provider: 'Various',
-      duration: '4 weeks',
-      description: 'Banking sector knowledge for IBPS and SBI exams',
-      link: '#'
-    }
-  ];
-  
-  return courses;
+  // Prioritize state matches
+  return results.sort((a, b) => {
+    const aIsStateMatch = a.job.stateReq.toLowerCase() === (profile.stateDomicile || '').toLowerCase();
+    const bIsStateMatch = b.job.stateReq.toLowerCase() === (profile.stateDomicile || '').toLowerCase();
+    
+    if (aIsStateMatch && !bIsStateMatch) return -1;
+    if (!aIsStateMatch && bIsStateMatch) return 1;
+    
+    // Fallback: Eligible first
+    if (a.status === 'ELIGIBLE' && b.status === 'NOT ELIGIBLE') return -1;
+    if (a.status === 'NOT ELIGIBLE' && b.status === 'ELIGIBLE') return 1;
+    
+    return 0;
+  });
 }
 
 export function getScholarships() {
   return [
     {
-      id: 'nsp-central',
-      name: 'Central Sector Scheme',
-      organization: 'Ministry of Education',
-      amount: '₹10,000 - ₹20,000/year',
-      eligibility: 'Students above 80th percentile in Class XII',
-      deadline: '2026-10-31'
+      id: "schol-1",
+      name: "Merit-cum-Means Scholarship",
+      organization: "Ministry of Minority Affairs",
+      amount: "₹20,000/year",
+      eligibility: "Technical & Professional Courses",
+      deadline: "2024-10-31"
     },
     {
-      id: 'pm-scholarship',
-      name: 'PM Scholarship Scheme',
-      organization: 'Ministry of Defence',
-      amount: '₹2,500 - ₹3,000/month',
-      eligibility: 'Wards of Ex-servicemen/Ex-Coast Guard personnel',
-      deadline: '2026-09-30'
-    },
-    {
-      id: 'pragati',
-      name: 'Pragati Scholarship for Girls',
-      organization: 'AICTE',
-      amount: '₹50,000/year',
-      eligibility: 'Girl students in technical education',
-      deadline: '2026-11-30'
-    },
-    {
-      id: 'obc-fellowship',
-      name: 'OBC Pre-Matric Scholarship',
-      organization: 'Ministry of Social Justice',
-      amount: 'Varies by state',
-      eligibility: 'OBC students with family income below ₹2.5 lakh',
-      deadline: '2026-08-31'
-    },
-    {
-      id: 'saksham',
-      name: 'Saksham Scholarship',
-      organization: 'AICTE',
-      amount: '₹50,000/year',
-      eligibility: 'Differently-abled students in technical education',
-      deadline: '2026-11-30'
+      id: "schol-2",
+      name: "Udaan Scholarship",
+      organization: "CBSE",
+      amount: "₹15,000",
+      eligibility: "Girl Students in Class 11-12",
+      deadline: "2024-09-15"
     }
   ];
 }
+

@@ -1,13 +1,17 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
-import { ProfileProvider, useProfile } from "@/lib/profile-context";
+import { useProfile } from "@/lib/profile-context";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
-function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { isOnboarded, isLoading } = useProfile();
   const router = useRouter();
   const pathname = usePathname();
@@ -42,17 +46,5 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
         {children}
       </main>
     </div>
-  );
-}
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <ProfileProvider>
-      <DashboardLayoutContent>{children}</DashboardLayoutContent>
-    </ProfileProvider>
   );
 }

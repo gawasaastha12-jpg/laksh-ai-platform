@@ -44,6 +44,8 @@ export const viewport: Viewport = {
   maximumScale: 1,
 }
 
+import { ProfileProvider } from "@/lib/profile-context";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,8 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark bg-background">
       <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <ProfileProvider>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </ProfileProvider>
       </body>
     </html>
   )

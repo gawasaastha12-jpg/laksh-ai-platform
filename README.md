@@ -13,8 +13,6 @@ Government job recruitment in India is plagued by complexity:
 ### ⚖️ AI Smart-Match Engine
 Our engine parses complex government notifications using NLP and compares them against the user's **Smart Profile**. Users get an instant **Green (Eligible)** or **Red (Ineligible)** status for every major exam.
 
-### 📄 OCR Document Vault
-Upload certificates once. The system uses **Optical Character Recognition** to extract validity dates and category details, flagging potential rejection risks before the user even applies.
 
 ### 🗺️ The "Bridge" Roadmap
 Ineligible for your dream role? Yogy doesn't just say "No." It generates a path, recommending specific certifications (e.g., NIELIT, SWAYAM) to make you eligible for the next cycle.
@@ -32,6 +30,6 @@ Connects high-potential, low-income students with verified NGOs to sponsor appli
 
 - **Frontend:** Next.js 14, Tailwind CSS, Framer Motion (Animations), Shadcn/UI
 - **Backend:** FastAPI (Python) / Node.js
-- **AI/ML:** Python (spaCy/Sentence-Transformers for PDF parsing), Scikit-learn (Success Prediction)
+- **AI/ML:** Python ,Scikit-learn (Success Prediction)
 - **Database:** PostgreSQL (Relational logic for Reservation Categories)
-- **Scraper:** Scrapy (Real-time job notification ingestion)
+

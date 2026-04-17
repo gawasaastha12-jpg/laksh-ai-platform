@@ -1,21 +1,24 @@
 export type Category = 'general' | 'obc' | 'sc' | 'st' | 'ews' | 'pwd';
 
-export type EligibilityStatus = 'eligible' | 'near-eligible' | 'ineligible';
+export type EligibilityStatus = 'ELIGIBLE' | 'NOT ELIGIBLE';
 
 export interface UserProfile {
   // Personal
   name: string;
   age: number;
   category: Category;
+  stateDomicile: string;
+  language: 'EN' | 'HI';
   
   // Education
   degree: string;
   graduationYear: number;
   percentage: number;
   
-  // Skills
+  // Skills / Subjects
   skills: string[];
   certifications: string[];
+  subjects: string[];
 }
 
 export interface Job {

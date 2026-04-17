@@ -23,6 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Category, UserProfile } from "@/lib/types";
+import { useProfile } from "@/lib/profile-context";
+
 
 const steps = [
   { id: 1, title: "Personal", icon: User },
@@ -80,11 +82,28 @@ const certificationOptions = [
   "ITI Certificate",
 ];
 
+const indianStates = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", 
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", 
+  "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", 
+  "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+  "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", 
+  "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+];
+
+const subjectOptions = [
+  "PCM", "PCB", "Commerce", "Arts", "Economics", "History", "Geography", 
+  "Political Science", "Computer Science", "Accounting", "Public Administration",
+  "Sociology", "Psychology"
+];
+
 const STORAGE_KEY = 'laksh_profile';
 const ONBOARDED_KEY = 'laksh_onboarded';
 
 export default function OnboardingPage() {
   const router = useRouter();
+  const { isOnboarded, isLoading, setProfile, setIsOnboarded } = useProfile();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -94,27 +113,29 @@ export default function OnboardingPage() {
     name: "",
     age: "",
     category: "" as Category | "",
+    stateDomicile: "",
+    language: "EN" as "EN" | "HI",
     degree: "",
     graduationYear: "",
     percentage: "",
     skills: [] as string[],
     certifications: [] as string[],
+    subjects: [] as string[],
   });
 
   useEffect(() => {
     setMounted(true);
     // Check if already onboarded
-    const isOnboarded = localStorage.getItem(ONBOARDED_KEY) === 'true';
-    if (isOnboarded) {
+    if (!isLoading && isOnboarded) {
       router.push('/dashboard');
     }
-  }, [router]);
+  }, [isLoading, isOnboarded, router]);
 
   const updateFormData = (field: string, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const toggleArrayItem = (field: "skills" | "certifications", item: string) => {
+  const toggleArrayItem = (field: "skills" | "certifications" | "subjects", item: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: prev[field].includes(item)
@@ -126,9 +147,9 @@ export default function OnboardingPage() {
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return formData.name && formData.age && formData.category;
+        return formData.name && formData.age && formData.category && formData.stateDomicile;
       case 2:
-        return formData.degree && formData.graduationYear && formData.percentage;
+        return formData.degree && formData.graduationYear && formData.percentage && formData.subjects.length > 0;
       case 3:
         return formData.skills.length > 0;
       default:
@@ -138,24 +159,24 @@ export default function OnboardingPage() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    
-    // Simulate processing
-    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const profile: UserProfile = {
       name: formData.name,
       age: parseInt(formData.age),
       category: formData.category as Category,
+      stateDomicile: formData.stateDomicile,
+      language: formData.language,
       degree: formData.degree,
       graduationYear: parseInt(formData.graduationYear),
       percentage: parseFloat(formData.percentage),
       skills: formData.skills,
       certifications: formData.certifications,
+      subjects: formData.subjects,
     };
 
-    // Save to localStorage
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-    localStorage.setItem(ONBOARDED_KEY, 'true');
+    // Save to context
+    setProfile(profile);
+    setIsOnboarded(true);
     
     router.push("/dashboard");
   };
@@ -308,25 +329,74 @@ export default function OnboardingPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="category">Category</Label>
-                      <Select
-                        value={formData.category}
-                        onValueChange={(value) => updateFormData("category", value)}
-                      >
-                        <SelectTrigger className="h-12 bg-input">
-                          <SelectValue placeholder="Select your category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {categories.map((cat) => (
-                            <SelectItem key={cat.value} value={cat.value}>
-                              {cat.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </motion.div>
+                       <Label htmlFor="category">Category</Label>
+                       <Select
+                         value={formData.category}
+                         onValueChange={(value) => updateFormData("category", value)}
+                       >
+                         <SelectTrigger className="h-12 bg-input">
+                           <SelectValue placeholder="Select your category" />
+                         </SelectTrigger>
+                         <SelectContent>
+                           {categories.map((cat) => (
+                             <SelectItem key={cat.value} value={cat.value}>
+                               {cat.label}
+                             </SelectItem>
+                           ))}
+                         </SelectContent>
+                       </Select>
+                     </div>
+ 
+                     <div className="space-y-2">
+                       <Label htmlFor="stateDomicile">State Domicile</Label>
+                       <Select
+                         value={formData.stateDomicile}
+                         onValueChange={(value) => updateFormData("stateDomicile", value)}
+                       >
+                         <SelectTrigger className="h-12 bg-input">
+                           <SelectValue placeholder="Select your state" />
+                         </SelectTrigger>
+                         <SelectContent>
+                           {indianStates.map((state) => (
+                             <SelectItem key={state} value={state}>
+                               {state}
+                             </SelectItem>
+                           ))}
+                         </SelectContent>
+                       </Select>
+                     </div>
+ 
+                     <div className="space-y-2">
+                       <Label htmlFor="language">Preferred Language</Label>
+                       <div className="flex items-center gap-4 py-2">
+                         <div className="flex items-center space-x-2">
+                           <input
+                             type="radio"
+                             id="lang-en"
+                             name="language"
+                             value="EN"
+                             checked={formData.language === "EN"}
+                             onChange={(e) => updateFormData("language", e.target.value)}
+                             className="accent-primary w-4 h-4"
+                           />
+                           <Label htmlFor="lang-en" className="font-normal cursor-pointer">English</Label>
+                         </div>
+                         <div className="flex items-center space-x-2">
+                           <input
+                             type="radio"
+                             id="lang-hi"
+                             name="language"
+                             value="HI"
+                             checked={formData.language === "HI"}
+                             onChange={(e) => updateFormData("language", e.target.value)}
+                             className="accent-primary w-4 h-4"
+                           />
+                           <Label htmlFor="lang-hi" className="font-normal cursor-pointer">हिंदी</Label>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </motion.div>
               )}
 
               {/* Step 2: Education */}
@@ -400,6 +470,28 @@ export default function OnboardingPage() {
                       <p className="text-xs text-muted-foreground">
                         Enter percentage (out of 100) or CGPA converted to percentage
                       </p>
+                    </div>
+
+                    <div className="space-y-3 pt-4">
+                      <Label>Specific Subjects Studied</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {subjectOptions.map((subj) => (
+                          <motion.button
+                            key={subj}
+                            type="button"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => toggleArrayItem("subjects", subj)}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                              formData.subjects.includes(subj)
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                            }`}
+                          >
+                            {subj}
+                          </motion.button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>

@@ -1,300 +1,166 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
   CheckCircle2,
   AlertTriangle,
   XCircle,
-  Clock,
   BookOpen,
-  Lightbulb,
-  Calendar,
-  IndianRupee,
-  Users,
-  Building2,
+  ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { EligibilityResult } from "@/lib/types";
+import { EligibilityResult } from "@/lib/eligibility";
+import { mockSyllabus } from "@/lib/mock/syllabus";
 import { cn } from "@/lib/utils";
+import { useProfile } from "@/lib/profile-context";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface JobDetailPanelProps {
   result: EligibilityResult | null;
   onClose: () => void;
 }
 
-function CountdownTimer({ targetDate }: { targetDate: string }) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const target = new Date(targetDate).getTime();
-
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = target - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          ),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [targetDate]);
-
-  return (
-    <div className="flex items-center gap-3">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="text-center">
-          <div className="bg-secondary rounded-lg px-3 py-2 min-w-[50px]">
-            <span className="text-xl font-bold text-primary">
-              {String(value).padStart(2, "0")}
-            </span>
-          </div>
-          <span className="text-xs text-muted-foreground capitalize mt-1 block">
-            {unit}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function JobDetailPanel({ result, onClose }: JobDetailPanelProps) {
-  if (!result) return null;
+  const { profile } = useProfile();
+  
+  // Use a ref to cache the previous result for the exit animation
+  const prevResultRef = useRef<EligibilityResult | null>(null);
+  useEffect(() => {
+    if (result) prevResultRef.current = result;
+  }, [result]);
 
-  const { job, status, probability, qualifications, gaps } = result;
-
-  const statusConfig = {
-    eligible: {
-      icon: CheckCircle2,
-      label: "You are Eligible",
-      color: "text-[oklch(0.65_0.2_145)]",
-      bg: "bg-[oklch(0.65_0.2_145)]/10",
-    },
-    "near-eligible": {
-      icon: AlertTriangle,
-      label: "Nearly Eligible",
-      color: "text-[oklch(0.75_0.15_85)]",
-      bg: "bg-[oklch(0.75_0.15_85)]/10",
-    },
-    ineligible: {
-      icon: XCircle,
-      label: "Not Eligible",
-      color: "text-[oklch(0.55_0.2_25)]",
-      bg: "bg-[oklch(0.55_0.2_25)]/10",
-    },
-  };
-
-  const config = statusConfig[status];
-  const StatusIcon = config.icon;
+  const displayResult = result || prevResultRef.current;
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ type: "spring", damping: 30, stiffness: 300 }}
-        className="fixed right-0 top-0 bottom-0 w-full max-w-lg bg-card border-l border-border z-50 overflow-y-auto"
+      {result && displayResult && (
+        <>
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            key="panel"
+        initial={{ y: "100%", opacity: 0, rotateX: -15 }}
+        animate={{ y: 0, opacity: 1, rotateX: 0 }}
+        exit={{ y: "100%", opacity: 0, rotateX: 15 }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="fixed inset-x-0 bottom-0 md:top-4 md:bottom-4 md:right-4 md:left-auto md:max-w-xl w-full bg-card md:rounded-2xl border border-border z-50 overflow-y-auto shadow-2xl"
+        style={{ transformOrigin: "bottom center" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-card border-b border-border p-6 z-10">
-          <div className="flex items-start justify-between">
+        <div className="sticky top-0 bg-card/95 backdrop-blur-md border-b border-border p-6 z-10">
+          <div className="flex items-start justify-between mb-4">
             <div>
-              <h2 className="text-2xl font-bold">{job.name}</h2>
-              <p className="text-muted-foreground">{job.fullName}</p>
+              <h2 className="text-2xl font-bold">{displayResult.job.title}</h2>
+              <p className="text-muted-foreground">{displayResult.job.board}</p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="shrink-0"
-            >
+            <Button variant="ghost" size="icon" onClick={onClose} className="shrink-0 rounded-full">
               <X className="h-5 w-5" />
             </Button>
           </div>
 
-          {/* Status Badge */}
-          <div
-            className={cn(
-              "mt-4 p-4 rounded-xl flex items-center gap-3",
-              config.bg
-            )}
-          >
-            <StatusIcon className={cn("h-6 w-6", config.color)} />
-            <div>
-              <p className={cn("font-semibold", config.color)}>{config.label}</p>
-              <p className="text-sm text-muted-foreground">
-                Success Probability: {probability}%
-              </p>
-            </div>
+          <div className={cn("p-4 rounded-xl flex items-start gap-3", displayResult.status === "ELIGIBLE" ? "bg-status-eligible/10" : "bg-destructive/10")}>
+             {displayResult.status === "ELIGIBLE" ? (
+               <CheckCircle2 className="h-6 w-6 text-status-eligible shrink-0" />
+             ) : (
+               <XCircle className="h-6 w-6 text-destructive shrink-0" />
+             )}
+             <div>
+                <p className={cn("font-bold text-lg", displayResult.status === "ELIGIBLE" ? "text-status-eligible" : "text-destructive")}>
+                  {displayResult.status}
+                </p>
+                {displayResult.status === "ELIGIBLE" ? (
+                  <p className="text-sm text-foreground/80 mt-1">You meet all the requirements for this position!</p>
+                ) : (
+                  <div className="text-sm text-foreground/80 mt-1">
+                    <p className="font-semibold mb-1">Reason(s):</p>
+                    <ul className="list-disc list-inside space-y-1 ml-1 text-destructive/90">
+                      {displayResult.reasons.map((r, i) => <li key={i}>{r}</li>)}
+                    </ul>
+                  </div>
+                )}
+             </div>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-6 space-y-8">
-          {/* Job Info */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-secondary">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <IndianRupee className="h-4 w-4" />
-                <span className="text-sm">Salary</span>
+          
+          {/* Apply Button */}
+          {displayResult.status === "ELIGIBLE" ? (
+            <Button className="w-full text-lg h-14 bg-primary hover:bg-primary/90" onClick={() => window.open(displayResult.job.officialUrl, '_blank')}>
+              Apply on Official Govt Portal
+              <ArrowUpRight className="ml-2 h-5 w-5" />
+            </Button>
+          ) : (
+            displayResult.roadmap.length > 0 && (
+              <div className="bg-secondary/50 rounded-xl p-5 border border-border">
+                <h3 className="font-bold flex items-center gap-2 mb-3">
+                  <AlertTriangle className="h-5 w-5 text-primary" /> Roadmap to Eligible
+                </h3>
+                <ul className="space-y-2">
+                  {displayResult.roadmap.map((step: string, i: number) => (
+                    <li key={i} className="flex gap-2 items-start text-sm">
+                      <div className="h-5 w-5 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">{i+1}</div>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="font-medium">{job.salary}</p>
-            </div>
-            <div className="p-4 rounded-xl bg-secondary">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <Users className="h-4 w-4" />
-                <span className="text-sm">Vacancies</span>
-              </div>
-              <p className="font-medium">{job.vacancies.toLocaleString()}</p>
-            </div>
-            <div className="p-4 rounded-xl bg-secondary">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <Building2 className="h-4 w-4" />
-                <span className="text-sm">Department</span>
-              </div>
-              <p className="font-medium">{job.department}</p>
-            </div>
-            <div className="p-4 rounded-xl bg-secondary">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <Calendar className="h-4 w-4" />
-                <span className="text-sm">Apply By</span>
-              </div>
-              <p className="font-medium">
-                {new Date(job.applicationDeadline).toLocaleDateString("en-IN", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </p>
-            </div>
-          </div>
+            )
+          )}
 
-          {/* Result Countdown */}
+          {/* Job Info Summary */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Clock className="h-5 w-5 text-primary" />
-              Exam Countdown
-            </h3>
-            <CountdownTimer targetDate={job.examDate} />
+            <h3 className="text-lg font-semibold mb-3">Job Summary</h3>
+            <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">{displayResult.job.description}</p>
           </div>
 
-          {/* Why You Qualify */}
-          {qualifications.length > 0 && (
+          {/* Syllabus Accordion */}
+          {mockSyllabus.find(s => s.jobId === displayResult.job.id) && (
             <div>
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-[oklch(0.65_0.2_145)]" />
-                Why You Qualify
+                <BookOpen className="h-5 w-5 text-primary" /> Focus Syllabus
               </h3>
-              <ul className="space-y-2">
-                {qualifications.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-3 text-sm"
-                  >
-                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.65_0.2_145)] shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </motion.li>
+              
+              <Accordion type="single" collapsible className="w-full border border-border rounded-xl px-4 bg-muted/20">
+                {mockSyllabus.find(s => s.jobId === displayResult.job.id)!.subjects.map((subject, idx) => (
+                  <AccordionItem value={`item-${idx}`} key={idx} className="border-b last:border-none border-border">
+                    <AccordionTrigger className="font-semibold hover:text-primary transition-colors">
+                      {subject.subjectName}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-4 pt-2 pb-4">
+                        {subject.topics.map((topic, tidx) => (
+                          <div key={tidx} className="bg-background rounded-lg p-3 border border-border shadow-sm">
+                            <h4 className="font-semibold mb-2 text-primary">{topic.title[profile?.language || 'EN']}</h4>
+                            <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 ml-2">
+                               {topic.details.map((detail, didx) => (
+                                 <li key={didx}>{detail}</li>
+                               ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
                 ))}
-              </ul>
+              </Accordion>
             </div>
           )}
 
-          {/* Gaps to Address */}
-          {gaps.length > 0 && (
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-[oklch(0.75_0.15_85)]" />
-                Gaps to Address
-              </h3>
-              <ul className="space-y-2">
-                {gaps.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-3 text-sm"
-                  >
-                    <XCircle className="h-4 w-4 text-[oklch(0.55_0.2_25)] shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Exam Syllabus */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-primary" />
-              Exam Syllabus
-            </h3>
-            <div className="space-y-2">
-              {job.syllabus.map((topic, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-3 rounded-lg bg-secondary text-sm"
-                >
-                  {topic}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Preparation Tips */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Lightbulb className="h-5 w-5 text-primary" />
-              Preparation Tips
-            </h3>
-            <ul className="space-y-3">
-              {job.tips.map((tip, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-3 text-sm text-muted-foreground"
-                >
-                  <span className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 text-xs font-medium">
-                    {index + 1}
-                  </span>
-                  <span>{tip}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
         </div>
       </motion.div>
+        </>
+      )}
     </AnimatePresence>
   );
 }
