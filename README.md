@@ -13,7 +13,6 @@ Government job recruitment in India is plagued by complexity:
 ### ⚖️ AI Smart-Match Engine
 Our engine parses complex government notifications using NLP and compares them against the user's **Smart Profile**. Users get an instant **Green (Eligible)** or **Red (Ineligible)** status for every major exam.
 
-
 ### 🗺️ The "Bridge" Roadmap
 Ineligible for your dream role? Yogy doesn't just say "No." It generates a path, recommending specific certifications (e.g., NIELIT, SWAYAM) to make you eligible for the next cycle.
 
